@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>积分</title>
+</head>
+
+<body class="bg_f5">
+   	<div class="plr20 ptb10 wp100 bg_fff  b_bd_b clearfix lh15rem">
+   		<div class="wp60 fl s_10">
+            <p class="t_4d">积分</p>
+            <p class="t_999 pt10" id="amount">0</p>
+        </div>
+        <div class="wp40 fl tr  s_10">
+            <span id="buyIntegral" class="mt8 t_6698eb button1 b_6698eb">橙券转化</span>
+        </div>
+   	</div>
+
+   	<div class="wp100 mt10 bg_fff">
+    <ul id="fd-ul">
+    </ul>
+	</div>
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/user/Integral']);
+    </script>
+    <script type="text/javascript">
+    	$("#buyIntegral").on("click",function () {
+    		location.href ="buyIntegral.html"
+    	})
+    </script>
+</body>
+</html>

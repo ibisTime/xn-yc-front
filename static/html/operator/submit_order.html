@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>提交订单</title>
+</head>
+
+<body class="bg_f5">
+    <div class="wp100" id="container">
+        <div class="pl10 t_80 s_11 ptb4 addressDivTitle bg_fff b_e_b">收货信息</div>
+        <div class="wp100 plr10 ptb20 lh2em p_r bg_fff" id="addressDiv">
+            <div class="s_10 hidden" id="noAddressDiv">
+                <div class="wp100 tc"><img class="wp44p" src="../../images/no-address.png" /></div>
+                <p class="wp100 tc">还没有收货地址，去<a id="add-addr" class="t_f64444">添加</a></p>
+            </div>
+            <i class="address-bottom hidden" id="addressRight"></i>
+        </div>
+        
+        <div class="pl10 t_80 s_11 ptb4 mt10 bg_fff b_e_b">购物清单</div>
+        <div id="items-cont" class="wp100 lh1_5em p_r t_323232 s_10 bg_fff"></div>
+        
+        
+        <div class="pl10 t_80 s_11 ptb4 mt10 bg_fff b_e_b">配送方式</div>
+        <div class="wp100 plr10 ptb20 lh1_5em p_r t_666 s_12 bg_fff">
+            <div class="wp100">配送方式：<select class="b_bd s_12 t_333" id="psfs"><option value="1">邮寄</option><option value="2">自提</option></select>
+            </div>
+            <div class="wp100 pt10 hidden" id="sj">
+                线下实体店：<select class="b_bd s_12 t_333" id="seller"></select>
+            </div>
+            <div class="wp100 pt10" id="zt">
+                运费：<span class="t_333">买家承担运费</span>
+            </div>
+        </div>
+        
+        
+        <div class="pl10 t_80 s_11 ptb4 mt10 bg_fff b_e_b">备注</div>
+        <div class="wp100 plr10 ptb10 lh1_5em p_r t_666 s_12 bg_fff">
+            <div class="wp100 pt10">
+                <textarea rows="3" class="b_bd s_12 plr4 ptb4 wp100 t_666" placeholder="选填" id="apply_note"></textarea>
+            </div>
+        </div>
+    </div>
+    
+    <i id="cont" class="icon-loading"></i>
+    <div id="od-mask" class="mask hidden"></div>
+    <div id="od-tipbox" class="od-dialog wp80 mlr_auto bg_fff shadow-box hidden">
+        <div class="pl10 t_80 s_10 ptb4 b_bd_b">提示</div>
+        <div class="wp100 tc s_12 ptb20 b_bd_b"></div>
+        <div class="wp100 clearfix tc lh2_5em">
+            <div class="wp50 fl od-okbtn" id="odOk">确认</div>
+            <div class="wp50 fl t_80" id="odCel">取消</div>
+        </div>
+    </div>
+    <div style="height: 88px;"></div>
+    <footer class="fixft bg_fff b_bd_t s_14 tc">
+        <div class="wp70 fl s_13 tl tl">
+        	<div class="fl ab" style="top: 0;left: 10px;line-height: 56px;">总计:</div>
+            <div class="wp100 pl60 t_f64444 s_11 over-hide fl" style="height: 56px;">
+            	<p id="totalCBAmount" class="inline_block va-m" ></p>
+            	<samp class="hook"></samp>
+            </div>
+        </div>
+        <div class="wp30 fl bg_f64444 t_white lh3_1em" id="sbtn">提交订单</div>
+    </footer>
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/operator/SubmitOrder']);
+    </script>
+</body>
+
+</html>

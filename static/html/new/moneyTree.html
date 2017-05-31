@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>摇钱树</title>
+
+
+	<style>
+		.MZSM ,.playWays{
+			width:100%;
+			height:100%;
+			position: fixed;
+			top:0px;
+			left: 0px;
+			background-color: rgba(0,0,0,0.6);
+			z-index: 20;
+			color: white;
+			display: none;
+		}
+		.MZSM button ,.playWays button{
+			height:50px ;
+			width:80%;
+			position: fixed;
+			bottom:20px;
+			left:10%;
+			background-color:#f44332 ;
+			text-align: center;
+			font-size: 1.2rem;
+			color: white;
+			/*font-weight: 600;*/
+			border-radius: 10px;
+			border:none;
+
+		}
+		.playWays-Content, .MZContent{
+			overflow-y: scroll;
+		}
+		@media only screen and (min-width: 580px) {
+			.playWays-Content, .MZContent{
+				height: 530px;
+			}
+		}
+		@media only screen and (max-width: 500px) {
+			.playWays-Content, .MZContent{
+				height: 480px;
+			}
+		}
+		@media only screen and (max-width: 376px) {
+			.playWays-Content, .MZContent{
+				height: 410px;
+			}
+		}
+		@media only screen and (max-width: 321px) {
+			.playWays-Content, .MZContent{
+				height: 330px;
+			}
+		}
+		.close{
+			width: 30px;
+			right: 10px;
+			top: 10px;
+		}
+	</style>
+
+</head>
+
+<body class="bg_f5">
+   	<div class="plr16 ptb10">
+   		<p class="tr s_11 play-way">玩法介绍</p>
+   	</div>
+   	<div class="wp100 hp170p mt40 tc">
+   		<img id="treePic" class="hp100" src="" alt="" />
+   	</div>
+   	<div class="plr60 mt20">
+   		<p class="tc">价格：<span class="price t_red"></span>元</p>
+
+   	</div>
+   	<div class="plr100 mt50">
+   		<button class="toBuyTree wp100 br_10p hp48p tc lh48 bg_f64444 t_white s_13">确认购买</button>
+   	</div>
+	<div class="MZSM p_r Mpopup">
+		<div class="close ab"><img src="../../images/close.png" /></div>
+		<div class="MZContent p20 mt50">
+		</div>
+		<button class="s_14">我已阅读</button>
+	</div>
+
+	<div class="playWays Mpopup">
+		<div class="close ab"><img src="../../images/close.png" /></div>
+		<div class="playWays-Content p20 mt50">
+
+		</div>
+		<button class="s_14">我已阅读</button>
+	</div>
+
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/new/MoneyTree']);
+    </script>
+</body>
+</html>

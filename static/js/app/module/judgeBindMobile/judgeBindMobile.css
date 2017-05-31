@@ -1,0 +1,85 @@
+input, button {
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+}
+
+.login-chose-module-container {
+    padding: 0 1.5rem;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1024;
+    background-color: #f0f0f0;
+}
+
+.login-chose-avatar-container {
+    width: 100%;
+    margin: 70px auto 30px;
+}
+
+.login-chose-avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-chose-avatar-container img {
+	width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+
+.login-chose-btn {
+    line-height: 40px;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.login-chose-btn-primary {
+    color: #ffffff;
+    background-color: #F64444;
+}
+
+.login-chose-btn-default {
+    border: 1px solid #e1e1e1;
+    background: #fff;
+    color: #838383;
+}
+
+.login-chose-input-container {
+    margin-top: 20px;
+}
+.login-chose-input-container1{
+    margin-top: 90px;
+}
+
+.login-chose-title {
+    /*color: #b4b4b4;*/
+    font-size: 14px;
+}
+
+.login-chose-title1 {
+    color: #636363;
+    margin-top: 1rem;
+    font-size: 14px;
+}
+
+.login-chose-nickname {
+    color: #2f2f2f;
+    font-size: 14px;
+}

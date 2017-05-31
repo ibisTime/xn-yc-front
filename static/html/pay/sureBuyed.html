@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>摇钱树支付</title>
+</head>
+
+<body class="bg_f5">
+   	
+   	<div class="hp48p wp100 bg_fff  b_bd_b plr10 s_12 lh48">
+   		<p>RMB金额：<span class="price"></span></p>
+   	</div>
+
+   <div class="b_bd_tb ptb10  bg_fff p_r s_12">
+            <img src="../../images/余额.png" class="va-m wp22p ml10">
+            <span class="pl4 inline_block va-m">余额支付(余额:<span id="rmbRemain"></span>)</span>
+            <input checked value="yePay" class="ab ab_r20" type="radio" name="buy"/>
+    </div>
+    <div class="b_bd_tb ptb10  bg_fff p_r s_12">
+            <img src="../../images/weixin-qq-icon.png" class="va-m wp22p ml10">
+            <span class="pl4 inline_block va-m">微信支付</span>
+            <input value="wxPay" class="ab ab_r20" type="radio" name="buy"/>
+    </div>
+    
+    <div style="height: 106px;"></div>
+    
+    
+   <footer class="fixft bg_fff b_bd_t hfoot hp48p lh48 s_11">
+      
+          
+            <p class="wp70 pr20 fl tc ptb2">实际支付<span id="payNum" class="t_f64444">￥100</span></p>
+            <p id="sureBuyed" class="wp30 bg_f64444 t_white fl tc ptb2 ">确认支付</p>
+       
+      
+    </footer>
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/new/SureBuyed']);
+    </script>
+</body>
+</html>

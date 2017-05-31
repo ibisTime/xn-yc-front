@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+     <link rel="stylesheet" href="../css/base.css">
+    <title>账户设置</title>
+</head>
+
+<body class="bg_f5">
+
+    <div class="bg_fff lh3em">
+       
+        <a href="./changeMobile.html" class="show b_e_b plr10 p_r">
+        	<span class="mobile">修改手机号</span>
+        <i class="r-tip"></i>
+    	</a>
+    	<!--<a href="./resetPwd.html" class="plr10 p_r b_e_b show">
+        	修改登录密码
+        <i class="r-tip"></i>
+    	</a>-->
+        <a href="./set_tradePwd.html" class="show b_e_b plr10 p_r">
+        	修改交易密码
+        <i class="r-tip"></i>
+    	</a>
+    	 <a href="./bankCard_list.html" class="plr10 p_r b_e_b show">
+        	银行卡
+        <i class="r-tip"></i>
+    	</a>
+    	 <a href="../operator/address_list.html" class="plr10 p_r show">
+       		 收货地址
+        <i class="r-tip"></i>
+    	</a>
+    </div>
+    <div class="bg_fff  mt30 lh3em">
+    	<a href="./aboutus.html" class="plr10 p_r show">
+       		 关于我们
+        <i class="r-tip"></i>
+    	</a>
+    </div>
+    <!--<div class="fixft lh3em tc bg_fff t_ed2b2b b_bd_t" id="loginOut">退出登录</div>-->
+    <i id="loaddingIcon" class="icon-loading bg_transparent hidden top_0"></i>
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/user/UserSet']);
+    </script>
+</body>
+
+</html>

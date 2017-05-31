@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>分类列表</title>
+</head>
+
+<body class="bg_f5">
+
+    <div class="wp100 p_fixed zIndex900">
+        <div class="wp100 plr10 bg_f64444 ptb4 clearfix">
+            <div class="wp100 bg_f64444 ptb2">
+                <div class="wp100 br_4p clearfix p_r">
+                    <input id="searchInput" placeholder="输入商户名" class="search-input bg_fff s_12" type="text" />
+                </div>
+            </div>
+        </div>
+        <div class="plr20 bg_efdade s_10" style="line-height: 45px;">
+            <div class="inline_block" id="lTypes">
+                <span class="va-m inline_block s_12 mr20"></span>
+                <img src="../../images/c-down.png" class="va-m wp16p" />
+            </div>
+            <!--<div class="consume-list-top-line"></div>
+            <div class="inline_block" id="lAreas">
+                <span class="va-m inline_block">全部</span>
+                <img src="../../images/c-down.png" class="va-m wp16p" />
+            </div>-->
+        </div>
+    </div>
+    <div id="mask" class="mask hidden"></div>
+    <div class="bg_fff wp100 clist_div hidden" id="cListDiv">
+        <ul class="wp100 consume_ul1" id="consumeUl"></ul>
+    </div>
+    <div style="height:112px;"></div>
+    <div class="plr10 wp100 cons-list">
+        <ul class="wp100 bg_fff s_11 br_4p mt8 b_bd hidden" id="searchUl"></ul>
+    </div>
+
+    <div class="consume-cont bg_fff">
+        <ul id="consume-ul" class="consume-ul"></ul>
+    </div>
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/consume/List']);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <link rel="import" href="../head.html?__inline">
+	<link rel="stylesheet" href="../css/base.css">
+    <title>橙券买单</title>
+</head>
+<body class="bg_f5">
+	<div>
+		<div class="am-list-item am-input-item">
+	        <div class="am-input-label am-input-label-5">充值面额</div>
+	        <div class="am-input-control"><input id="needAmount" type="text" value="" readonly=""></div>
+	    </div>
+		<div class="am-list-item am-input-item">
+	        <div class="am-input-label am-input-label-5">需支付橙券</div>
+	        <div class="am-input-control"><input id="CBAmount" type="text" value="" readonly=""></div>
+	    </div>
+		<div class="pay-small-item b-t-ed" style="margin-top: -2px;color: #f64444;height: 40px; line-height: 40px;">橙券余额：<span id="CBRemain"></span></div>
+	</div>
+	<footer class="fixft bg_fff b_bd_t s_13 tc lh3em">
+        <div class="wp70 fl tl pl10">实际支付：<div class="va-m inline_block">
+                <div><span class="t_f64444" id="totalAmount"></span>橙券</div>
+            </div>
+        </div>
+        <div class="wp30 fl bg_f64444 t_white lh3_1em" id="sbtn">立即支付</div>
+    </footer>
+	<div id="od-mask" class="mask hidden"></div>
+	<div id="od-tipbox" class="od-dialog wp80 mlr_auto bg_fff shadow-box hidden">
+	    <div class="pl10 t_80 s_10 ptb4 b_bd_b">提示</div>
+	    <div class="wp100 tc s_12 ptb20 b_bd_b">您确定支付<span id="integral" class="t_f64444"></span>橙券吗？</div>
+	    <div class="wp100 clearfix tc lh2_5em">
+	        <div class="wp50 fl od-okbtn" id="odOk">确定支付</div><div class="wp50 fl t_80" id="odCel">取消</div>
+	    </div>
+	</div>
+    <i id="loaddingIcon" class="icon-loading bg_transparent top_0"></i>
+
+<link rel="import" href="../footer.html?__inline">
+<script>
+    require(['app/controller/detail/MallRechargeCardPay']);
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>账户流水</title>
+</head>
+
+<body class="bg_f5">
+   	<div class="plr20 ptb10 wp100 bg_fff  b_bd_b clearfix lh15rem">
+   		<div class="wp50 fl s_10">
+            <p class="t_4d">可用余额</p>
+            <p class=" t_999 pt10" id="amount">0</p>
+        </div>
+        <div class="wp25 fl tr  s_10">
+            <span id="recharge" class="mt8 t_6698eb button1 b_6698eb">充值</span>
+        </div>
+        <div class="wp25 fl tr  s_10">
+            <span id="toWithDraw" class="mt8 t_6698eb button1 b_6698eb">提现</span>
+        </div>
+   	</div>
+
+   	<div class="wp100 mt10 bg_fff">
+    <ul id="fd-ul"></ul>
+	</div>
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/user/CNYFlow']);
+    </script>
+</body>
+</html>

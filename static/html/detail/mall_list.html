@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>商城兑换</title>
+    <style>
+        #mallWrapper {
+            position: absolute;
+            z-index: 1;
+            bottom: 48px;
+            top: 0;
+            right: 40px;
+            left: 0;
+            background: #fff;
+            height: 42px;
+            line-height: 42px;
+            overflow: hidden;
+        }
+        
+        #scroller {
+            position: absolute;
+            z-index: 1;
+            color: #333;
+            left: 0px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            height: 100%;
+            background-color: #fff;
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-text-size-adjust: none;
+            -moz-text-size-adjust: none;
+            -ms-text-size-adjust: none;
+            -o-text-size-adjust: none;
+        }
+        
+        #scroller ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+            height: 100%;
+        }
+        
+        #scroller li {
+            float: left;
+            height: 100%;
+            font-size: 1.2rem;
+            padding: 0 14px;
+        }
+        
+        #scroller li.current {
+            border-bottom: 2px solid #f64444;
+            color: #f64444;
+        }
+        
+        #down {
+            z-index: 1001;
+        }
+        #mlTable ul{
+            overflow: hidden;
+        }
+        #mlTable ul li{
+            float: left;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 15px;
+        }
+        #mlTable ul .active{
+
+            background-color:  #f64444;
+
+
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="bg_f5">
+    <header class="wp100" style="background: #f7f7f7;position: fixed;z-index: 999;">
+        <div id="down" class="mall-up-down down-arrow"></div>
+        <div id="allCont" class="hidden bg_fff">
+            <div class="t_666 ml-top-fl plr16 bg_fff b_bd_b s_12 bg_fff">所有分类</div>
+            <div id="allItem" class="plr16 bg_fff ml-top-item s_12 b_bd_t">
+                <ul class="clearfix t_333"></ul>
+            </div>
+            <div id="mall-mask" class="mall-mask"></div>
+        </div>
+        <div id="mallWrapper" class="b_bd_b z_index999">
+            <div id="scroller">
+                <ul></ul>
+            </div>
+        </div>
+    </header>
+
+
+    <!--<a class="buy-cart-icon" href="../user/cart.html"><i></i><div class="infoIcon hidden"></div></a>-->
+    <div class="hp48p"></div>
+    <div class="m10">
+        <i id="cont" class="icon-loading"></i>
+        <div class="wp100 mall_list_table" id="mlTable">
+            <ul>
+                <!--<li class="wp20 tc active">12</li>-->
+               <!---->
+              <!---->
+                <!--<li class="wp20 tc">12</li>-->
+
+
+            </ul>
+        </div>
+    </div>
+
+
+    <div id="md-div" class="wp100 bg_fff">
+        <ul id="contUl" class="max-hp100">
+            <!--<li class="ptb8 clearfix b_bd_b plr10">
+            	<a class="show p_r min-h100p" href="../operator/buy.html?code=MM201608111542278525">
+            		<div class="order-img-wrap tc">
+            			<img class="center-img1 wp100" src="http://121.40.48.48:8901/2016081115/20160822403573987250297.jpg">
+            			
+            		</div>
+            		<div class="order-right-wrap clearfix">
+            			<p class="t_323232 s_12 line-tow">美的洗衣机 JY-017</p>
+            			<p class="t_999 s_10 line-tow">Mide洗衣机</p>
+            			<p class="t_red">3000<span class="s_10 t_40pe pl4">积分</span>+700.00<span class="s_10 t_40pe pl4">元</span></p>
+            			<p class="s_10">市场参考价：<span>2500.00</span>元</p>
+            		</div>
+            	</a>
+            </li>-->
+        </ul>
+    </div>
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/detail/MallList']);
+    </script>
+</body>
+
+</html>

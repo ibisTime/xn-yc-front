@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>提现</title>
+    <style>
+    	.bankSelect{
+    		top: 0;
+    		left: 0;
+    	}
+    </style>
+</head>
+
+<body class="bg_f5">
+   	<!--<div class="plr15 ptb20 t_f64444 bg_fff s_12 b-b-ed">
+   		<p>温馨提示：</p>
+   		<p>1.提现最低限额<i id="cuserQxbs1"></i>，且以<i id="cuserQxbs"></i>的倍数递增</p>
+   		<p>2.单笔手续费率<i id="cuserQxfl"></i>%</p>
+   		<p>3.到账时间T+<i id="cuserQxsx"></i></p>
+   	</div>-->
+   	<form id="withDrawForm" class="bankCardForm">
+   		<!-- <p class="lh40">到账银行卡：<span>6222***133</span></p> -->
+        <input type="hidden" id="accountNumber" name="accountNumber" />
+        <div class="am-list-item am-list-item-middle">
+            <div class="am-list-line">
+                <div class="am-list-content">到账银行卡</div>
+                <div class="am-list-extra" id="payCardNoSpan">请选择</div>
+                <div class="am-list-arrow am-list-arrow-horizontal"></div>
+            </div>
+            <select id="payCardNo" name="payCardNo" class="over-select bankSelect"></select>
+        </div>
+        <div class="am-list-item am-input-item">
+            <div class="am-input-label am-input-label-5">可用金额(¥)</div>
+            <div class="am-input-control">
+                <input id="remainAmount" name="remainAmount" type="text" value="" readonly>
+            </div>
+        </div>
+   		<!-- <p class="lh40">可用金额：<span id="remain"></span></p> -->
+        <div class="am-list-item am-input-item">
+            <div class="am-input-label am-input-label-5">提现金额(¥)</div>
+            <div class="am-input-control">
+                <input id="amount" name="amount" type="number" placeholder="请输入提现金额">
+            </div>
+        </div>
+        <div class="am-list-item am-input-item">
+            <div class="am-input-label am-input-label-5">交易密码</div>
+            <div class="am-input-control">
+                <input id="tradePwd" name="tradePwd" type="password" placeholder="请输入交易密码">
+            </div>
+        </div>
+   		<!-- <p class="lh40">提取金额：<input class="hp30p s_13 plr20" type="number" id="amount"/></p> -->
+   	</form>
+   	<div class="mt120  mlr20">
+   		<button class="wp100 br_10p hp48p tc lh48 bg_f64444 t_white s_13" id="sbtn">提交</button>
+   	</div>
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/user/ToWithDraw']);
+    </script>
+</body>
+</html>

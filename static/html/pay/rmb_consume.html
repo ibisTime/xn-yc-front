@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>人民币埋单</title>
+</head>
+
+<body class="bg_f5">
+    <div class="s_12 t_bold b_bd_b p10 bg_fff" id="name"></div>
+    <div class="am-list-item am-input-item">
+        <div class="am-input-label am-input-label-5">消费总金额</div>
+        <div class="am-input-control"><input id="rmbAmount" type="number" value="" placeholder="询问服务员后输入"></div>
+    </div>
+    <!--<div class="am-list-item am-input-item">
+        <div class="am-input-label am-input-label-5">需支付RMB</div>
+        <div class="am-input-control"><input id="needAmount" type="text" value="0" readonly></div>
+    </div>-->
+    <div class="am-list-item am-input-item">
+        <div class="am-input-label am-input-label-5">返现橙券</div>
+        <div class="am-input-control"><input id="fxCB" type="text" value="0" readonly></div>
+    </div>
+    <div class="pay-small-item b-t-ed">支付方式</div>
+    <div id="content">
+        <div id="yeCont" class="pay-item mt0 active">
+            <img src="../../images/zhye.png?__inline" class="pay-item-img" />
+            <div class="pl34">RMB余额支付(余额：<span id="rmbRemain"></span>)</div>
+            <div class="chose-icon circle-icon"></div>
+        </div>
+        <div id="wxCont" class="pay-item mt0">
+            <img src="../../images/wechat.png?__inline" class="pay-item-img" />
+            <div class="pl34">微信支付</div>
+            <div class="chose-icon circle-icon"></div>
+        </div>
+    </div>
+
+    <footer class="fixft bg_fff b_bd_t s_14 tc lh3em">
+        <div class="wp60 fl tl pl10">消费总计:
+            <div class="t_f64444 va-m lh1_2em inline_block">
+                <div class="">¥<span id="totalAmount">0</span></div>
+            </div>
+        </div>
+        <div class="wp40 fl bg_f64444 t_white lh3_1em" id="sbtn">确认支付</div>
+    </footer>
+    <link rel="import" href="../footer.html?__inline">
+
+    <script>
+        require(['app/controller/RmbConsume']);
+    </script>
+</body>
+
+</html>

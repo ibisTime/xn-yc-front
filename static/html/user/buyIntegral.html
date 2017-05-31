@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>购买积分</title>
+</head>
+
+<body class="bg_f5">
+	
+	<div class="p15 bg_fff b_bd_b">
+		<span class="pr10">购买数量</span>
+		<input  id="jfAmount" type="number" value="" placeholder="请输入购买积分数量" class="plr10 s_12"/>
+	</div>
+    <div class="am-list-item am-input-item">
+        <div class="am-input-label am-input-label-5">所需橙券</div>
+        <div class="am-input-control"><input id="needAmount" type="text" value="" readonly></div>
+    </div>
+    <div class="pay-small-item b-t-ed" style="
+        margin-top: -2px;
+        color: #f64444;
+        height: 40px;
+        line-height: 40px;
+    ">橙券余额：<span id="reaminCB"></span></div>
+    <div style="height: 106px;"></div>
+    <footer class="fixft bg_fff b_bd_t hfoot hp48p lh48 s_11">
+        <!-- <p class="wp70 pr20 fl tl pl15 ptb2">实际支付<span class="t_f64444">￥<span id="totalAmount"></span></span></p> -->
+        <p class="wp100 bg_f64444 t_white fl tc ptb2" id="sbtn">确认支付</p>
+    </footer>
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+    // require(['app/controller/BuyIntegral']);
+        require(['app/controller/user/BuyIntegral']);
+    </script>
+</body>
+</html>

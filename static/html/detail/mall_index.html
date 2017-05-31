@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>商城兑换</title>
+</head>
+
+<body class="bg_f5">
+	<i id="cont" class="icon-loading"></i>
+    <nav style="margin: 0 10px; padding: 11px 0;" class="p_r">
+        <input id="searchInput" placeholder="搜索商品" class="searchInput b_radius8" type="text" />
+        <a href="javascript:void(0)" id="searchIcon" class="show"><img class="mr-img2" src="../../images/search.png" /></a>
+    </nav>
+
+	<!--商家消费里面的分类-->
+    <div class="bg_fff pt15 plr10 pb4 wp100 tableWrap" id="tableWrap">
+        <ul class="classOne">
+        	<li><a href="./recharge_card.html">
+        		<div>
+        			<img src="../../images/充值专区@2x.png">
+        		</div>
+        		<p>充值专区</p>
+        	</a></li>
+        </ul>
+    </div>
+    
+	<!--详情-->
+	<div class="wp100 bg_fff mt10 b_e_b over-hide plr10 ptb10">
+		<img class="hp20p fl" src="../../images/rqtj.png" />
+		<div class="fs15 fl pl10">人气推荐</div>
+	</div>
+	
+    <div id="md-div" class="wp100 md-div bg_fff">
+        <ul id="contUl" class="b_bd_b max-hp100">
+            <!--<li class="scroll-loadding"></li>-->
+        </ul>
+    </div>
+
+    <div class="mlr10 bg_fff mt10 hcont" id="allItems"></div>
+
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/detail/MallIndex']);
+    </script>
+</body>
+
+</html>

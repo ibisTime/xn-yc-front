@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <!--<link rel="import" href="../head.html?__inline">-->
+
+
+    <title>夺宝记录</title>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../../css/reset.css">
+
+<style>
+    body{
+        background-color: #f5f5f5;
+    }
+	
+	.fs13{
+		font-size: 13px;
+	}
+	.b_e_b{
+		border-bottom: 1px solid #eee;
+	}
+	.joinWrap{
+		background-color: #fff;
+		padding-top: 5px;
+	}
+	.joinWrap p{
+		padding: 15px 15px;
+		color: #888888;
+	}
+	.joinWrap_p1{
+		color: #CCCCCC;
+	}
+	.joinWrap_p2{
+		padding: 10px 15px 0 !important;
+	}
+	.joinWrap p i{
+		color: #f00;
+	}
+	.joinWrap p span{
+		display: inline-block;
+		line-height: 1.8;
+		padding-right: 20px;
+	}
+    .indianaDetail li{
+        margin-bottom: 10px;
+    }
+    .indianaDetail li .wrap{
+        height:135px ;
+        position: relative;
+        font-size:0.12rem;
+        color: white;
+         background:url('../../images/橙色.png')no-repeat ;
+        background-size: 100% 100%;
+    }
+    .indianaDetail .indiana-num{
+        width: 0.75rem;
+        height: 27px;
+        line-height: 27px;
+        text-align: center;
+        border-bottom-left-radius: 27px;
+        border-top-left-radius: 27px;
+        background-color: #fe4332;
+        position: absolute;
+        right: 0rem;
+        top:0rem;
+    }
+    .indianaDetail .indiana-has{
+        font-size: 0.16rem;
+        position: absolute;
+        left:0.15rem;
+        height: 20px;
+        width: 3rem;
+        line-height: 20px;
+        top:30px;
+
+    }
+    .wrapDiv{
+        width: 1.55rem;
+        height: 10px;
+        margin-left: 0.1rem;
+        position: absolute;
+        left:0.8rem;
+        top: 5px;
+        background-color: #e6e6e6;
+        border-radius: 0.1rem;
+        overflow: hidden;
+    }
+    .wrapDiv div{
+        /*width: 100%;*/
+        height: 10px;
+        background-color:limegreen;
+    }
+
+    .indianaDetail .indiana-person{
+        width: 0.8rem;
+        position: absolute;
+        left: 0.15rem;
+        bottom:0.3rem;
+    }
+    .indianaDetail .indiana-person p{
+        text-align: center;
+        margin-top: 6px;
+
+    }
+    .indianaDetail .indiana-last{
+        width: 0.8rem;
+        position: absolute;
+        left: 1.15rem;
+        bottom:30px
+
+    }
+    .indianaDetail .indiana-last p{
+        text-align: center;
+        margin-top: 6px
+
+    }
+    .indianaDetail .indiana-price{
+        width: 0.8rem;
+        position: absolute;
+        left: 2.15rem;
+        bottom:30px
+    }
+    .indianaDetail .indiana-price p{
+        text-align: center;
+        margin-top: 6px
+
+    }
+    .indianaDetail .num{
+        color: #974b05;
+    }
+    .icon-loading {
+        background: url(../../images/loading.gif) 50% 56% no-repeat;
+        width: 100%;
+        display: block;
+        position: fixed;
+
+        height: 100%;
+        left: 0;
+        background-color: #fff;
+        z-index: 999;
+    }
+
+</style>
+</head>
+<body>
+<i id="cont" class="icon-loading"></i>
+<ul class="indianaDetail">
+
+</ul>
+<link rel="import" href="../footer.html?__inline">
+<script src="../../js/rem/rem.js"></script>
+<script>
+    require(['app/controller/new/IndianaSecord']);
+</script>
+</body>
+</html>

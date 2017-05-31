@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>搜索</title>
+</head>
+
+<body class="bg_f5">
+    <header class="bg_fff z_index10 ml_header p_r b_bd_b">
+        <nav style="height: 44px;" class="p_r">
+            <input id="searchInput" placeholder="搜索商品" class="searchInput b_radius8" type="text" />
+            <a href="javascript:void(0)" id="searchIcon" class="show"><img class="mr-img1" src="../../images/search.png" /></a>
+        </nav>
+    </header>
+    <div style="height: 44px;"></div>
+    <div id="md-div" class="wp100 bg_fff">
+        <ul id="searchUl" class="max-hp100">
+            <!-- <li class="scroll-loadding"></li> -->
+        </ul>
+    </div>
+    <!-- <div class="plr20 wp100">
+        <ul class="wp100 bg_fff s_11 br_4p mt8" id="searchUl">
+            <li>商品名称1</li>
+        <li>商品名称2</li>
+        <li>商品名称3</li>
+
+        </ul>
+    </div> -->
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/detail/Search']);
+    </script>
+</body>
+
+</html>

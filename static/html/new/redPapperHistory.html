@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>发定向红包</title>
+    <style>
+    	.fs13{
+    		font-size: 13px;
+    	}
+        .share{
+            display: none;
+        }
+        .bg_begin{
+            background: url("../../images/发一发2-未发送底框.png") no-repeat center;
+            background-size: 100% 100%;
+        }
+        .bg_ing{
+            background: url("../../images/发一发2-待领取底框.png") no-repeat center;
+            background-size: 100% 100%;
+        }
+        .bg_end{
+            background: url("../../images/发一发2－已领取底框.png") no-repeat center;
+            background-size: 100% 100%;
+        }
+
+
+        .wrapDialog{
+            width:100%;
+            height:100%;
+            position: fixed;
+            top:0px;
+            left: 0px;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 10;
+            color: white;
+            display: none;
+        }
+        .wrapDialog .dialog{
+            height:140px ;
+            width:250px;
+            position: absolute;
+            bottom:40%;
+            left:15%;
+            color:#f44332 ;
+            text-align: center;
+            background-color: white;
+            /*font-size: 0.16rem;*/
+
+            /*font-weight: 600;*/
+            border-radius: 10px;
+            border:none;
+            padding-left:20px;
+            padding-top:2px;
+
+        }
+        .close{
+            border:1px solid #f44332;
+            border-radius: 50%;
+            background-color:#f44332;
+            width: 20px;
+            height: 20px;
+        }
+
+        .wrapDialog1{
+            width:100%;
+            height:100%;
+            position: fixed;
+            top:0px;
+            left: 0px;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 10;
+            color: white;
+            display: none;
+        }
+        .wrapDialog1 .dialog1{
+            height:140px ;
+            width:250px;
+            position: absolute;
+            bottom:40%;
+            left:15%;
+            color:#f44332 ;
+            text-align: center;
+            background-color: white;
+            /*font-size: 0.16rem;*/
+
+            /*font-weight: 600;*/
+            border-radius: 10px;
+            border:none;
+            padding-left:20px;
+            padding-top:2px;
+
+        }
+        .close1{
+            border:1px solid #f44332;
+            border-radius: 50%;
+            background-color:#f44332;
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+
+<body class="bg_f5">
+    <ul class="redPapperWrap">
+    </ul>
+	<div class="tc s_16 mt14 share">
+	    <p>喊人！领红包！</p>
+	    <div class="hp84p wxShare"><img class="hp84p" src="../../images/微信.png" alt=""></div>
+	    <p>微信好友</p>
+	</div>
+	<div class="wrapDialog tc">
+	    <div class="dialog">
+	        <div class="wp100 tr"><img class="close t_red" src="../../images/close.png" alt=""></div>
+	        <p class="s_12 tl">您的红包已经被领取</p>
+	        <p class="s_10 tl">领取人：<span class="name">2134</span></p>
+	        <p class="s_10 tl">领取时间：<span class="time">45678</span></p>
+	        <p class="s_10 tl">您的红包业绩已经到账，请注意查收！</p>
+	    </div>
+	</div>
+
+    <div class="wrapDialog1 tc">
+        <div class="dialog1">
+            <div class="wp100 tr"><img class="close1 t_red" src="../../images/close.png" alt=""></div>
+            <p class="s_12 tl">您的红包未被被领取</p>
+            <p class="s_10 tl">快通知小伙伴领取红包吧，不然要过期的</p>
+        </div>
+    </div>
+
+<link rel="import" href="../footer.html?__inline">
+<script>
+    require(['app/controller/new/RedPapperHistory']);
+</script>
+
+</body>
+</html>

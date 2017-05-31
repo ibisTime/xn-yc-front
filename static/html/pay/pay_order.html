@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>支付订单</title>
+</head>
+<body class="bg_f5">
+<div class="wp100" id="container">
+    <div class="pl10 t_80 s_10 ptb4 bg_fff b_e_b">订单信息</div>
+    <div class="wp100 plr10 ptb10 lh2em p_r bg_fff s_10" id="addressDiv"></div>
+    <div class="pl10 t_80 s_10 ptb4 mt10 bg_fff b_e_b">购物清单</div>
+    <div id="items-cont" class="wp100 lh1_5em p_r t_323232 s_10 bg_fff"></div>
+</div>
+<i id="cont" class="icon-loading"></i>
+<i id="loaddingIcon" class="icon-loading bg_transparent hidden top_0"></i>
+<div id="od-mask" class="mask hidden"></div>
+<div id="od-tipbox" class="od-dialog wp80 mlr_auto bg_fff shadow-box hidden">
+    <div class="pl10 t_80 s_10 ptb4 b_bd_b">提示</div>
+    <div class="wp100 tc s_12 ptb20 b_bd_b">您确定要支付订单吗？</div>
+    <div class="wp100 clearfix tc lh2_5em">
+        <div class="wp50 fl od-okbtn" id="odOk">确定支付</div><div class="wp50 fl t_80" id="odCel">取消</div>
+    </div>
+</div>
+<div class="pl10 t_80 s_10 ptb4 mt10 bg_fff b_e_b">支付方式</div>
+<div id="content">
+    <div id="CBCont" class="pay-item mt0 active">
+        <img src="../../images/cb-icon.png" class="pay-item-img" />
+        <div class="pl34">橙券余额支付(余额：<span id="CBRemain"></span>)</div>
+        <div class="chose-icon circle-icon"></div>
+    </div>
+    <div id="yeCont" class="pay-item mt0">
+        <img src="../../images/zhye.png?__inline" class="pay-item-img" />
+        <div class="pl34">RMB余额支付(余额：<span id="rmbRemain"></span>)</div>
+        <div class="chose-icon circle-icon"></div>
+    </div>
+    <div id="wxCont" class="pay-item mt0">
+        <img src="../../images/wechat.png?__inline" class="pay-item-img" />
+        <div class="pl34">微信支付</div>
+        <div class="chose-icon circle-icon"></div>
+    </div>
+</div>
+<div style="height: 60px;"></div>
+<footer class="fixft bg_fff b_bd_t s_14 tc">
+    <div class="wp70 fl s_13 tl tl">
+    	<div class="fl ab" style="top: 0;left: 10px;line-height: 56px;">总计:</div>
+        <div class="wp100 pl60 t_f64444 s_11 over-hide fl" style="height: 56px;">
+        	<p id="totalAmount" class="inline_block va-m" ></p>
+        	<samp class="hook"></samp>
+        </div>
+    </div>
+    <div class="wp30 fl bg_f64444 t_white lh3_1em" id="sbtn">支付订单</div>
+</footer>
+<link rel="import" href="../footer.html?__inline">
+<script>
+    require(['app/controller/operator/PayOrder']);
+</script>
+</body>
+</html>

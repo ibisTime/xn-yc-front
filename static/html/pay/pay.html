@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>夺宝购买</title>
+</head>
+
+<body class="bg_f5">
+
+<div class="plr20 hp48p wp100 bg_fff  b_bd_b clearfix lh48">
+    <span>购买数量</span>
+    <span class=" hp26p  pl10 mlr10 times" ></span>个
+
+</div>
+
+<div class="payWaysWrap"></div>
+
+<div style="height: 106px;"></div>
+
+
+<footer class="fixft bg_fff b_bd_t hp48p lh48 s_11">
+    <p class="wp70 pr20 pl20 fl tl ptb2">实际支付:<span class="t_f64444 totalMoney"></span><span class="MoneyType"></span></p>
+    <p id="toPay" class="wp30 bg_f64444 t_white fl tc ptb2">确认支付</p>
+</footer>
+<link rel="import" href="../footer.html?__inline">
+<script>
+    require(['app/controller/indiana/IndianaPay']);
+</script>
+</body>
+</html>

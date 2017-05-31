@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>充值专区详情</title>
+</head>
+
+<body class="bg_f5">
+	<div class="hidden"><img src="../../images/logo2.png"/></div>
+	<div class="wp100 bg_fff">
+		<img id="pic" src="" />
+	</div>
+	<div class="bg_fff p15">
+		<p id="name" class="fs15"></p>
+		<p id="slogan" class="fs13 t_999 lh150 mt5"></p>
+	</div>
+	
+	<div class="mt10 bg_fff">
+		<div class="b_e_b p_r rDetail_wrap">
+			<div class="w80p fs15 ab rDetail_lab cardNum"></div>
+			<input id="cardNum" class="p_r rDetail_input wp100 fs15" type="text" placeholder="请输入卡号" />
+		</div>
+		<div class="b_e_b p_r rDetail_wrap">
+			<div class="w80p fs15 ab rDetail_lab cardName">姓名</div>
+			<input id="cardName" class="p_r rDetail_input wp100 fs15" type="text" placeholder="请输入姓名" />
+		</div>
+		<div class="b_e_b p_r">
+			<div class="fs15 rDetail_lab plr15">充值面额</div>
+			<ul id="cardPrice" class="rDetail_priceList wp100 over-hide">
+			</ul>
+		</div>
+		
+	</div>
+	
+	<div style="height: 106px;"></div>
+    <footer class="fixft bg_fff b_bd_t s_14 tc lh3em">
+        <div class="wp60 fl tl pl10">费用：<div class="va-m inline_block">
+                <div><span class="t_f64444" id="totalAmount">0</span>橙券</div>
+            </div>
+        </div>
+        <div class="wp40 fl bg_f64444 t_white lh3_1em" id="sbtn">立即购买</div>
+    </footer>
+    <i id="loaddingIcon" class="icon-loading bg_transparent top_0"></i>
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/detail/MallRechargeCardDetail']);
+    </script>
+</body>
+
+</html>

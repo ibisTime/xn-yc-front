@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <link rel="stylesheet" href="../css/base.css">
+    <title>个人中心</title>
+</head>
+
+<body class="bg_f5">
+    <header class="bg_f64444 plr10 ptb20 p_r s_13">
+    	<a class="over-hide wp100 t_white" href="./user_set.html">
+	        <img id="userImg" src="../../images/person.png" class="va-m wp60p hp60p b_radius50 border2pfff fl" />
+	        <div class="fl pt6 inline_block">
+	        	<span class="pl20 inline_block va-m s_14" id="nickName"></span><br />
+	        	<span class="pl20 inline_block va-m s_12 mt5" id="mobile"></span>
+	        	<samp class="hook"></samp>
+	        </div>
+	        <div class="fr mt16"><img src="../../images/更多1@2x.png" class="w10p" /></div>
+        </a>
+    </header>
+    <div class="clearfix  tc s_12 bg_fff mb10">
+        <div class="fl wp50 br_f64444 ptb10">
+            <a href="./cnyFlow.html" class="show">
+                <span class="pl4 inline_block va-m">
+                    <span>账户余额：</span>
+                    <span class="t_f64444 s_12" id="cnyAmount"></span>
+                </span>
+            </a>
+        </div>
+        <div class="fl wp50 ptb10">
+            <a href="./cgMoney.html" class="show">
+                <span class="pl4 inline_block va-m">
+                    <span>橙券：</span>
+                    <span class="t_f64444 s_12" id="cbAmount"></span>
+                </span>
+            </a>
+        </div>
+    </div>
+    
+    <!--<div class="ptb10 bg_fff p_r s_12">
+        <a href='./vorder_list.html' class="show">
+            <img src="../../images/我的树@2x.png" class="va-m wp22p ml10">
+            <span class="pl4 inline_block va-m">定制订单</span>
+            <span class="r-tip"></span>
+        </a>
+    </div>
+    -->
+    <div class="b_e_b ptb10 bg_fff p_r s_12 mt10">
+        <a href='./consumption_list.html' class="show">
+            <img src="../../images/夺宝记录@2x.png" class="va-m wp22p ml10">
+            <span class="pl4 inline_block va-m">消费记录</span>
+            <span class="r-tip"></span>
+        </a>
+    </div>
+	
+    <div class="b_e_b ptb10 bg_fff p_r s_12">
+        <a href="./order_list.html" class="show">
+            <img src="../../images/wddd.png" class="va-m wp22p ml10">
+            <span class="pl4 inline_block va-m">兑换订单</span>
+            <span class="r-tip"></span>
+        </a>
+    </div>
+    <div class="clearfix s_10 pt18 pb14 bg_fff mb10">
+        <div class="fl wp33 tc">
+            <a href="./order_list.html?i=1">
+                <div><img class="wp30p" src="../../images/dfk.png"></div>
+                <p>待支付</p>
+            </a>
+        </div>
+        <div class="fl wp33 tc">
+            <a href="./order_list.html?i=2">
+                <div><img class="wp34p" src="../../images/dfh.png"></div>
+                <p>待发货</p>
+            </a>
+        </div>
+        <div class="fl wp33 tc">
+            <a href="./order_list.html?i=3">
+                <div><img class="wp27p" src="../../images/dsh.png"></div>
+                <p>待收货</p>
+            </a>
+        </div>
+    </div>
+
+    
+	<div class="b_e_b ptb10 bg_fff p_r s_12">
+        <a href='./vorder_list.html' class="show">
+            <img src="../../images/gywm.png" class="va-m wp22p ml10">
+            <span class="pl4 inline_block va-m">我的专区订单</span>
+            <span class="r-tip"></span>
+        </a>
+    </div>
+    
+    <!--<div class="ptb10 bg_fff p_r s_12" id="demo">
+            <img src="../../images/gywm.png" class="va-m wp22p ml10">
+            <span class="pl4 inline_block va-m">我的专区订单</span>
+            <span class="r-tip"></span>
+    </div>
+    -->
+    <div class="s_16 tc t_666 mt50">
+        <img class="ui-phone-icon mb10" src="../../images/telephone.png" />
+        <div class="va-m inline_block mb10" id="telephone"></div>
+        <p class="s_12">服务时间：08:30-16:30</p>
+    </div>
+    
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/user/UserInfo']);
+    </script>
+    <script type="text/javascript">
+        $("#withDraw").on("click", function() {
+            location.href = "withDraw.html"
+        })
+    </script>
+</body>
+
+</html>
