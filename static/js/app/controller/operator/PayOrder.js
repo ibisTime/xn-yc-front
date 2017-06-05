@@ -97,7 +97,7 @@ define([
                         $("#rmbRemain").html("¥" + base.formatMoneyD(d.amount));
                     }else if(d.currency == "CB"){
                         CBRemain = +d.amount;
-                        $("#CBRemain").html(base.formatMoneyD(d.amount)+"橙券");
+                        $("#CBRemain").html(base.formatMoneyD(d.amount));
                     }
                 })
             }

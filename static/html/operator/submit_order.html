@@ -9,16 +9,8 @@
 
 <body class="bg_f5">
     <div class="wp100" id="container">
-        <div class="pl10 t_80 s_11 ptb4 addressDivTitle bg_fff b_e_b">收货信息</div>
-        <div class="wp100 plr10 ptb20 lh2em p_r bg_fff" id="addressDiv">
-            <div class="s_10 hidden" id="noAddressDiv">
-                <div class="wp100 tc"><img class="wp44p" src="../../images/no-address.png" /></div>
-                <p class="wp100 tc">还没有收货地址，去<a id="add-addr" class="t_f64444">添加</a></p>
-            </div>
-            <i class="address-bottom hidden" id="addressRight"></i>
-        </div>
         
-        <div class="pl10 t_80 s_11 ptb4 mt10 bg_fff b_e_b">购物清单</div>
+        <div class="pl10 t_80 s_11 ptb4 bg_fff b_e_b">购物清单</div>
         <div id="items-cont" class="wp100 lh1_5em p_r t_323232 s_10 bg_fff"></div>
         
         
@@ -26,12 +18,24 @@
         <div class="wp100 plr10 ptb20 lh1_5em p_r t_666 s_12 bg_fff">
             <div class="wp100">配送方式：<select class="b_bd s_12 t_333" id="psfs"><option value="1">邮寄</option><option value="2">自提</option></select>
             </div>
-            <div class="wp100 pt10 hidden" id="sj">
+            <div class="wp100 pt10 hidden">
                 线下实体店：<select class="b_bd s_12 t_333" id="seller"></select>
             </div>
-            <div class="wp100 pt10" id="zt">
-                运费：<span class="t_333">买家承担运费</span>
+            <div class="wp100 pt10 hidden" id="sj">
+                线下实体店：宁波余姚市中塑世纪大厦2幢373
             </div>
+            <div class="wp100 pt10" id="zt">
+                运费：<span class="t_333">平台承担运费</span>
+            </div>
+        </div>
+        
+        <div class="mt10 pl10 t_80 s_11 ptb4 addressDivTitle bg_fff b_e_b">收货信息</div>
+        <div class="wp100 plr10 ptb20 lh2em p_r bg_fff" id="addressDiv">
+            <div class="s_10 hidden" id="noAddressDiv">
+                <div class="wp100 tc"><img class="wp44p" src="../../images/no-address.png" /></div>
+                <p class="wp100 tc">还没有收货地址，去<a id="add-addr" class="t_f64444">添加</a></p>
+            </div>
+            <i class="address-bottom hidden" id="addressRight"></i>
         </div>
         
         
