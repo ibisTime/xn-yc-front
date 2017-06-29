@@ -122,6 +122,13 @@ define([
         getRechargeOrder(code, refresh) {
             return Ajax.get("808666", {code}, refresh);
         },
+        // 分页查询充值订单
+        getPageRechargeOrders(config, refresh) {
+            return Ajax.get("808668", {
+                applyUser: base.getUserId(),
+                ...config
+            })
+        },
         // 取消充值订单
         cancelRechargeOrder(codeList, remark) {
             return Ajax.post("808652", {
