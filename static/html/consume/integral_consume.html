@@ -2,8 +2,8 @@
 <html lang="zh-CN">
 <head>
     <link rel="import" href="../head.html?__inline">
-	<link rel="stylesheet" href="../css/base.css">
     <title>橙券埋单</title>
+    <!--SCRIPT_PLACEHOLDER-->
 </head>
 <body class="bg_f5">
 
@@ -11,7 +11,7 @@
 		<div class="s_12 t_bold b_bd_b p10 bg_fff" id="name"></div>
 		<div class="p10 bg_fff">
 			<span class="pr10">消费橙券</span>
-			<input type="text"  placeholder="询问服务员后输入" id="amount" class="plr10 lh2em s_12 h2_4em"/>
+			<input type="number" placeholder="询问服务员后输入" id="amount" class="plr10 lh2em s_12 h2_4em"/>
 		</div>
 		<div class="pay-small-item b-t-ed" style="margin-top: -2px;color: #f64444;height: 40px; line-height: 40px;">橙券余额：<span id="CBRemain"></span></div>
         <div class="wp100 mt50 plr10">
@@ -26,7 +26,6 @@
 	        <div class="wp50 fl od-okbtn" id="odOk">确定支付</div><div class="wp50 fl t_80" id="odCel">取消</div>
 	    </div>
 	</div>
-    <i id="loaddingIcon" class="icon-loading bg_transparent top_0"></i>
 
 <link rel="import" href="../footer.html?__inline">
 <script>

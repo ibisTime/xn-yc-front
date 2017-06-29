@@ -3,17 +3,17 @@
 
 <head>
     <link rel="import" href="../head.html?__inline">
-    <link rel="stylesheet" href="../css/base.css">
     <title>提交订单</title>
+    <!--SCRIPT_PLACEHOLDER-->
 </head>
 
 <body class="bg_f5">
     <div class="wp100" id="container">
-        
+
         <div class="pl10 t_80 s_11 ptb4 bg_fff b_e_b">购物清单</div>
         <div id="items-cont" class="wp100 lh1_5em p_r t_323232 s_10 bg_fff"></div>
-        
-        
+
+
         <div class="pl10 t_80 s_11 ptb4 mt10 bg_fff b_e_b">配送方式</div>
         <div class="wp100 plr10 ptb20 lh1_5em p_r t_666 s_12 bg_fff">
             <div class="wp100">配送方式：<select class="b_bd s_12 t_333" id="psfs"><option value="1">邮寄</option><option value="2">自提</option></select>
@@ -28,7 +28,7 @@
                 运费：<span class="t_333">平台承担运费</span>
             </div>
         </div>
-        
+
         <div class="mt10 pl10 t_80 s_11 ptb4 addressDivTitle bg_fff b_e_b">收货信息</div>
         <div class="wp100 plr10 ptb20 lh2em p_r bg_fff" id="addressDiv">
             <div class="s_10 hidden" id="noAddressDiv">
@@ -37,8 +37,8 @@
             </div>
             <i class="address-bottom hidden" id="addressRight"></i>
         </div>
-        
-        
+
+
         <div class="pl10 t_80 s_11 ptb4 mt10 bg_fff b_e_b">备注</div>
         <div class="wp100 plr10 ptb10 lh1_5em p_r t_666 s_12 bg_fff">
             <div class="wp100 pt10">
@@ -46,8 +46,7 @@
             </div>
         </div>
     </div>
-    
-    <i id="cont" class="icon-loading"></i>
+
     <div id="od-mask" class="mask hidden"></div>
     <div id="od-tipbox" class="od-dialog wp80 mlr_auto bg_fff shadow-box hidden">
         <div class="pl10 t_80 s_10 ptb4 b_bd_b">提示</div>

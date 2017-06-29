@@ -3,8 +3,8 @@
 
 <head>
     <link rel="import" href="../head.html?__inline">
-    <link rel="stylesheet" href="../css/base.css">
     <title>商家详情</title>
+    <!--SCRIPT_PLACEHOLDER-->
 </head>
 
 <body class="bg_f5">
@@ -19,10 +19,7 @@
             <div class="clearfix p10 p_r">
                 <p class="t_bold" id="name"></p>
                 <p class="fs14" id="slogan"></p>
-                <div class="fr" id="dzIcon">
-                    <img class="wp18p va-m" id="goodImg" src="../../images/good.png">
-                    <span class="inline_block va-m t_80 s_11" id="totalDzNum"></span>
-                </div>
+                <div class="fr t_ff0000" id="discount"></div>
             </div>
             <div class="plr10"><span class="s_11 t_80" id="advert"></span></div>
             <div class="p_r">
@@ -30,19 +27,17 @@
 	                <img class="va-m wp18p" src="../../images/position.png" />
 	                <span class="s_12" id="address"></span>
 	            </div>
-	            
+
 	            <div class="plr10 pb10 clearfix lh2em" id="bookMobile"></div>
-	            
+
 	            <div class="p10 ab" style="top:1.8rem;right: 0;">
 	                <button class="bg_f64444 t_white lh2em consume-detail-btn " id="sbtn" style="padding-left: 20px; padding-right: 20px;">埋单</button>
 	            </div>
             </div>
-            
+
         </div>
     </div>
     <div id="description" class="p10 bg_fff mt20"></div>
-    <i id="cont" class="icon-loading"></i>
-    <i id="loaddingIcon" class="icon-loading bg_transparent hidden top_0"></i>
     <div class="detail-chose-dialog hidden" id="choseDialog">
         <div class="am-modal-mask"></div>
         <div class="am-modal-wrap">
@@ -51,8 +46,7 @@
                     <div class="am-modal-body"></div>
                     <div class="am-modal-footer">
                         <div class="am-modal-button-group-v">
-                            <a class="am-modal-button" id="caigoPay" href="javascript:void(0)">橙券支付</a>
-                            <!--<a class="am-modal-button" id="cnyPay" href="javascript:void(0)">人民币+积分支付</a>-->
+                            <a class="am-modal-button" id="cqPay" href="javascript:void(0)">橙券支付</a>
                             <a class="am-modal-button" id="rmbPay" href="javascript:void(0)">人民币支付</a>
                         </div>
                     </div>
@@ -60,7 +54,7 @@
             </div>
         </div>
     </div>
-    
+
     <link rel="import" href="../footer.html?__inline">
     <script>
         require(['app/controller/consume/Detail']);

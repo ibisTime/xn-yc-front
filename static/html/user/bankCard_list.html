@@ -2,26 +2,13 @@
 <html lang="zh-CN">
 <head>
     <link rel="import" href="../head.html?__inline">
-    <link rel="stylesheet" href="../css/base.css">
     <title>银行卡</title>
+    <!--SCRIPT_PLACEHOLDER-->
 </head>
 <body class="bg_f5">
 <div class="wp100" id="container">
-    <div class="wp100 lh2em bankcard-contariner" id="bankCardContainer">
-        <!-- <div class="bankcard-item-wrap">
-            <div class="bankcard-item">
-                <img src="../../images/backcard_icon.png?__inline"/>
-                <div class="bankcard-item-right">
-                    <div class="bankcard-item-title">通用</div>
-                    <div class="bankcard-item-number">**** **** **** 3333</div>
-                </div>
-                <span class="bankcard-delete">删除</span>
-            </div>
-        </div> -->
-    </div>
+    <div class="wp100 lh2em bankcard-contariner" id="bankCardContainer"></div>
 </div>
-<!--<i id="cont" class="icon-loading top_0 bg_pc"></i>-->
-<!--<i id="loaddingIcon" class="icon-loading bg_transparent hidden top_0 bg_pc"></i>-->
 <div id="od-mask" class="mask hidden"></div>
 <div id="od-tipbox" class="od-dialog wp80 mlr_auto bg_fff shadow-box hidden">
     <div class="pl10 t_80 s_10 ptb4 b_bd_b">提示</div>
@@ -36,7 +23,7 @@
 </footer>
 <link rel="import" href="../footer.html?__inline">
 <script>
-    require(['app/controller/user/bankCardList']);
+    require(['app/controller/user/BankCardList']);
 </script>
 </body>
 </html>

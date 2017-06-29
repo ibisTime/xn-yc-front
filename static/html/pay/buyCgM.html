@@ -3,8 +3,8 @@
 
 <head>
     <link rel="import" href="../head.html?__inline">
-    <link rel="stylesheet" href="../css/base.css">
     <title>购买橙券</title>
+    <!--SCRIPT_PLACEHOLDER-->
 </head>
 
 <body class="bg_f5">
@@ -30,13 +30,12 @@
         </div>
     </div>
     <div style="height: 106px;"></div>
-    <footer class="fixft bg_fff b_bd_t hfoot hp48p lh48 s_11">
-        <!-- <p class="wp70 pr20 fl tl pl15 ptb2">实际支付<span class="t_f64444">￥<span id="totalAmount"></span></span></p> -->
-        <p class="wp100 bg_f64444 t_white fl tc ptb2" id="sbtn">确认支付</p>
+    <footer class="fixft bg_fff b_bd_t hp48p lh48 s_11">
+        <p class="wp100 bg_f64444 t_white fl tc" id="sbtn">确认支付</p>
     </footer>
     <link rel="import" href="../footer.html?__inline">
     <script>
-        require(['app/controller/BuyCgM']);
+        require(['app/controller/pay/BuyCgM']);
     </script>
 </body>
 </html>

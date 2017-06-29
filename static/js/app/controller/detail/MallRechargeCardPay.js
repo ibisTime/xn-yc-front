@@ -1,82 +1,67 @@
 define([
     'app/controller/base',
-    'app/util/ajax',
-    'lib/handlebars.runtime-v3.0.3'
-], function (base, Ajax, Handlebars) {
+    'app/interface/AccountCtr',
+    'app/interface/MallCtr'
+], function(base, AccountCtr, MallCtr) {
     var code = base.getUrlParam("code"),
-    	amount = base.getUrlParam("a"),
-    	rate = base.getUrlParam("rate");
+        amount = base.getUrlParam("a"),
+        rate = base.getUrlParam("rate");
 
-    initView();
+    init();
 
-    function initView(){
-        getAccount();
+    function init() {
+        base.showLoading();
+        getAccount().then(base.hideLoading);
         addListeners();
-        amount = amount*1000;
-        $("#needAmount").val(base.formatMoneyD(amount)+"元");
-        $("#CBAmount").val(base.formatMoneyD(amount*rate)+"橙券");
-        $("#totalAmount").text(base.formatMoneyD(amount*rate));
-        $("#loaddingIcon").addClass('hidden');
+        amount = amount * 1000;
+        $("#needAmount").val(base.formatMoneyD(amount) + "元");
+        $("#CBAmount").val(base.formatMoneyD(amount * rate) + "橙券");
+        $("#totalAmount").text(base.formatMoneyD(amount * rate));
     }
-    
+
     // 获取账户信息
-    function getAccount(){
-        return Ajax.get("802503", {
-            userId: base.getUserId()
-        }).then(function(res){
-            if(res.success){
-                var data = res.data;
-                data.forEach(function(d, i){
-                    if(d.currency == "CB"){
+    function getAccount() {
+        return AccountCtr.getAccount()
+            .then(function(data) {
+                data.forEach(function(d, i) {
+                    if (d.currency == "CB") {
                         $("#CBRemain").html(base.formatMoneyD(d.amount));
                     }
                 })
-            }
-        });
+            });
     }
-    
+
     function addListeners() {
         //确认按钮
-        $("#sbtn").on("click", function(){
-            $("#integral").text(base.formatMoneyD(amount*rate));
+        $("#sbtn").on("click", function() {
+            $("#integral").text(base.formatMoneyD(amount * rate));
             $("#od-mask, #od-tipbox").removeClass("hidden");
         });
         //提示框确认按钮
-        $("#odOk").on("click", function(){
+        $("#odOk").on("click", function() {
             integralConsume();
         });
         //提示框取消按钮
-        $("#odCel").on("click", function(){
+        $("#odCel").on("click", function() {
             $("#od-mask, #od-tipbox").addClass("hidden");
         });
     }
-    
-    function integralConsume(){
-        $("#loaddingIcon").removeClass("hidden");
-        var dCode = [];
-        dCode.push(code)
-        Ajax.post('808651', {
-            json: {
-                codeList: dCode,
-                payType: 90
-            }
-        }).then(function (res) {
-                $("#loaddingIcon").addClass("hidden");
+    // 橙券支付
+    function integralConsume() {
+        base.showLoading("支付中...");
+        MallCtr.payRechargeCardOrder([code])
+            .then(function() {
+                base.hideLoading();
                 $("#od-mask, #od-tipbox").addClass("hidden");
-                if (res.success) {
-                    location.href = "./pay_success.html";
-                }else{
-                    if(res.msg=="账户余额不足"){
-	                	base.confirm("账户余额不足，是否前往充值？","否","是").then(function(){
-	                        location.href = "../pay/buyCgM.html";
-	                	},function(){
-//	                        location.href = "../user/vorder_list.html";
-	                	})
-	                }else{
-	                	base.showMsg(res.msg);
-	                }
+                location.href = "./pay_success.html";
+            }, function(error, d){
+                if(d && error == "账户余额不足"){
+                    d.close().remove();
+                    base.confirm("账户余额不足，是否前往充值？", "否", "是").then(function() {
+                        location.href = "../pay/buyCgM.html";
+                    }, function() {});
                 }
             });
     }
-    
+
 });

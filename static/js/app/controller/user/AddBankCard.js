@@ -1,83 +1,61 @@
 define([
     'app/controller/base',
-    'app/util/ajax',
-    'app/module/loading/loading',
-    'app/module/validate/validate'
-], function(base, Ajax, loading, Validate) {
-	
+    'app/module/validate',
+    'app/interface/UserCtr'
+], function(base, Validate, UserCtr) {
     var returnUrl = sessionStorage.getItem("returnhref");
     var returnStatus = base.getUrlParam("return");
-    var code = base.getUrlParam("code")||"";
-    var bizCode = code?"802012":"802010";
-    var bankName="";
-    
-    //修改
-	
+    var code = base.getUrlParam("code");
+    var bankName = "";
+
     init();
-    
+
     function init(){
-        loading.createLoading();
-        
-        $("#userId").val(base.getUserId());
+        base.showLoading();
         if(code){
-        	$.when(
-        		getDetail(),
-        		$("title").html("修改银行卡")
-        	).done(getBankCode())
+            $("title").html("修改银行卡");
+        	getBankCard().done(getBankList());
         }else{
-        	
-        	$("title").html("新增银行卡")
-        	getBankCode();
+        	$("title").html("新增银行卡");
+        	getBankList();
         }
         addListeners();
-        
+
     }
-    
-    function getDetail(){
-    	Ajax.get("802017",{
-    	 	"code":code
-    	}).then(function(res){
-    		if(res.success){
-    			$("#realName").val(res.data.realName).attr("disabled","disabled");
-	    	 	$("#subbranch").val(res.data.subbranch);
-	    	 	$("#bankcardNumber").val(res.data.bankcardNumber);
-	    	 	$("#bindMobile").val(res.data.bindMobile);
-	    	 	$("#bankNameSpan").html(res.data.bankName);
-	    	 	bankName=res.data.bankName;
+    // 详情查询银行卡
+    function getBankCard(){
+        return UserCtr.getBankCard(code)
+            .then(function(data){
+    			$("#realName").val(data.realName).attr("disabled","disabled");
+	    	 	$("#subbranch").val(data.subbranch);
+	    	 	$("#bankcardNumber").val(data.bankcardNumber);
+	    	 	$("#bindMobile").val(data.bindMobile);
+	    	 	$("#bankNameSpan").html(data.bankName);
+                $("#bankCode").val(data.bankCode);
+	    	 	bankName = data.bankName;
             	$("#bankName option").each(function(){
-	            	if($(this).val()==res.data.bankName){
-	            		$(this).attr("selected",true).siblings().attr("selected",false)
+	            	if($(this).val() == data.bankName){
+	            		$(this).attr("selected", true).siblings().attr("selected", false);
 	            	}
-		        })
-	    	 	
-    		}else{
-                base.showMsg(res.msg);
-            }
-    	 	
-    	});
+		        });
+        	});
     }
-    
-    function getBankCode(){
-        Ajax.get("802116").then(function(res){
-            loading.hideLoading();
-            if(res.success){
-                var html = "";
-                html += '<option>请选择</option>';
-                for(var i = 0;i < res.data.length ; i++) {
-                	if(code&&bankName==res.data[i].bankName){
-                		html += '<option selected value="'+res.data[i].bankName+'" code="'+res.data[i].bankCode+'">'+res.data[i].bankName+'</option>';
-                	}else{
-                		html += '<option value="'+res.data[i].bankName+'" code="'+res.data[i].bankCode+'">'+res.data[i].bankName+'</option>';
-                	}
-                }
-                
-                $("#bankName").html(html);
-            }else{
-                base.showMsg(res.msg);
+    // 列表查询银行的数据字典
+    function getBankList(){
+        UserCtr.getBankList().then(function(data){
+            base.hideLoading();
+            var html = '<option>请选择</option>';
+            for(var i = 0; i < data.length; i++) {
+            	if(code && bankName == data[i].bankName){
+            		html += '<option selected value="'+data[i].bankName+'" code="'+data[i].bankCode+'">'+data[i].bankName+'</option>';
+            	}else{
+            		html += '<option value="'+data[i].bankName+'" code="'+data[i].bankCode+'">'+data[i].bankName+'</option>';
+            	}
             }
+            $("#bankName").html(html);
         });
     }
-    
+
     function addListeners(){
         $("#bankCardForm").validate({
             'rules': {
@@ -107,12 +85,12 @@ define([
         });
         $("#sbtn").on("click", function(){
             if($("#bankCardForm").valid()){
-            	if($("#bankName").val()=="请选择"){
+            	if($("#bankName").val() == "请选择"){
             		base.showMsg("请选择银行名称")
             	}else{
-            		addBankCard(bizCode);
+            		addOrEditBankCard();
             	}
-                
+
             }
         });
         $("#bankName").on("change", function(){
@@ -120,33 +98,29 @@ define([
             $("#bankCode").val($("#bankName option:selected").attr("code"));
         });
     }
-    
-    function addBankCard(b){
-        loading.createLoading("保存中...");
+
+    function addOrEditBankCard(){
+        base.showLoading("保存中...");
         var param = $("#bankCardForm").serializeObject();
         param.realName=$("#realName").val();
-        
+
         var successMsg = "添加银行卡成功";
         if(code){
-        	param.status="1";
-        	param.code=code;
+        	param.status = "1";
+        	param.code = code;
         	successMsg = "修改银行卡成功";
         }
-        Ajax.post(b, {json: param})
-            .then(function(res){
-                loading.hideLoading();
-                if(res.success){
-                    base.showMsg(successMsg);
-                    setTimeout(function(){
-                    	if(returnStatus){
-                    		location.replace(returnUrl);
-                    	}else{
-                    		location.replace(document.referrer);
-                    	}
-                    }, 1000);
-                }else{
-                    base.showMsg(res.msg);
-                }
+        UserCtr.addOrEditBankCard(param)
+            .then(function(){
+                base.hideLoading();
+                base.showMsg(successMsg);
+                setTimeout(function(){
+                	if(returnStatus){
+                		location.replace(returnUrl);
+                	}else{
+                		location.replace(document.referrer);
+                	}
+                }, 1000);
             });
     }
 })

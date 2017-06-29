@@ -1,32 +1,21 @@
 define([
     'app/controller/base',
-    'app/util/ajax',
-    'app/module/loading/loading',
-], function(base, Ajax, loading) {
-	var couponCode=base.getUrlParam("code");
-	
+    'app/interface/AccountCtr'
+], function(base, AccountCtr) {
+    var couponCode = base.getUrlParam("code");
+
     init();
-	
-	function init(){
-		loading.createLoading("卡券充值中...");
-		var param={
-			"userId": base.getUserId(),
-			"couponCode": couponCode,
-		}
-		
-		Ajax.post("805321",{
-			json:param
-		}).then(function(res){
-			if(res.success){
-				loading.hideLoading();
-				location.href="./get_success.html";
-			}else{
-				loading.hideLoading();
-				base.showMsg(res.msg);
-				setTimeout(function(){
-					location.href="../index.html"
-				},1600)
-			}
-		})
-	}
+
+    function init() {
+        base.showLoading("卡券充值中...");
+        AccountCtr.rechargeByCard(couponCode)
+            .then(function() {
+                base.hideLoading();
+                location.href = "./get_success.html";
+            }, function(){
+                setTimeout(function() {
+                    location.href = "../index.html"
+                }, 1600);
+            })
+    }
 })

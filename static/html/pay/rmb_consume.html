@@ -3,8 +3,8 @@
 
 <head>
     <link rel="import" href="../head.html?__inline">
-    <link rel="stylesheet" href="../css/base.css">
     <title>人民币埋单</title>
+    <!--SCRIPT_PLACEHOLDER-->
 </head>
 
 <body class="bg_f5">
@@ -13,10 +13,6 @@
         <div class="am-input-label am-input-label-5">消费总金额</div>
         <div class="am-input-control"><input id="rmbAmount" type="number" value="" placeholder="询问服务员后输入"></div>
     </div>
-    <!--<div class="am-list-item am-input-item">
-        <div class="am-input-label am-input-label-5">需支付RMB</div>
-        <div class="am-input-control"><input id="needAmount" type="text" value="0" readonly></div>
-    </div>-->
     <div class="am-list-item am-input-item">
         <div class="am-input-label am-input-label-5">返现橙券</div>
         <div class="am-input-control"><input id="fxCB" type="text" value="0" readonly></div>
@@ -46,7 +42,7 @@
     <link rel="import" href="../footer.html?__inline">
 
     <script>
-        require(['app/controller/RmbConsume']);
+        require(['app/controller/pay/RmbConsume']);
     </script>
 </body>
 

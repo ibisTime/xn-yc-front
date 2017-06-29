@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <link rel="import" href="../head.html?__inline">
+    <title>我的小果园</title>
+    <!--SCRIPT_PLACEHOLDER-->
+</head>
+
+<body class="bg_f5">
+    <div class="hidden pt120" id="noItem">
+        <div class="cartImg">
+            <img class="cartImg-img" src="../../images/order-img.png" />
+            <div class="cartImg-after"></div>
+        </div>
+        <div class="tc lh16em pt14">
+            <h1 class="s_16">您还没有相关的订单</h1>
+        </div>
+    </div>
+    <div id="content"></div>
+
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/user/OrchardOrders']);
+    </script>
+</body>
+
+</html>

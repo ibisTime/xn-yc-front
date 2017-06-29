@@ -3,65 +3,35 @@
 
 <head>
     <link rel="import" href="../head.html?__inline">
-    <link rel="stylesheet" href="../css/base.css">
-    <title>消费</title>
+    <title>线下消费</title>
+    <!--SCRIPT_PLACEHOLDER-->
 </head>
 
 <body class="bg_f5">
-
     <div class="plr10 wp100 p_fixed bg_f64444 zIndex901" id="conTop">
-    	
-    	<!--<nav style="height: 44px;margin: 10px;" class="p_r">
-	        <input id="searchInput" placeholder="搜索商品" class="searchInput b_radius8" type="text" />
-	        <a href="javascript:void(0)" id="searchIcon" class="show"><img class="mr-img2" src="../../images/search.png" /></a>
-	    </nav>-->
-	    
         <div class="wp100 ptb6 clearfix">
             <div class="wp100 br_4p clearfix p_r inline_block p_r">
                 <input id="searchInput" placeholder="搜索商户" class="search-input bg_fff pr14i pl35i s_12" type="text" />
                 <div class="show"><img class="va-m max-hp15em consume-ml"  id="searchIcon"  src="../../images/search.png" /></div>
             </div>
-            <div class="wp100 consume-sul">
+            <div class="consume-sul">
 		        <ul class="wp100 bg_fff s_11 br_4p b_bd hidden" id="searchUl"></ul>
 		    </div>
         </div>
     </div>
-
-    <i id="loaddingIcon1" class="icon-loading bg_transparent hidden top_0"></i>
-
-<!--分类-->
     <div class="bg_fff p10 pt15 wp100 tableWrap consume-fl" id="tableWrap">
-        <ul class="classOne" id="con-table">
-        </ul>
+        <ul class="classOne" id="con-table"></ul>
     </div>
-<!-- -->
-	
+
 	<div class="wp100 bg_fff mt10 b_e_b over-hide plr10 ptb10">
 		<img class="hp20p fl" src="../../images/rqtj.png" />
 		<div class="fs15 fl pl10">人气推荐</div>
 	</div>
-	
+
     <div class="consume-cont bg_fff">
         <ul id="consume-ul" class="consume-ul"></ul>
     </div>
 
-    <div id="mask" class="mask hidden zIndex900"></div>
-    <div class="bg_fff wp100 consume_list_div hidden" style="z-index: 900" id="consumeDiv">
-        <div class="wp100 bg_f5 ptb10" style="padding: 8px 10px;position: fixed;">
-            <div class="wp100 br_4p clearfix p_r">
-                <input id="cityInput" placeholder="输入城市名" class="search-input bg_fff" type="text">
-                <a href="javascript:void(0)" id="searchCity" class="consume-top-a"><img class="mh100" src="/static/images/search.png"></a>
-            </div>
-            <div id="result">
-                <div id="nowDiv" class="inline_block"></div>
-                <span class="pl10 hidden" id="noResult">未找到相关城市</span>
-                <div class="hidden fr" id="sResult"></div>
-            </div>
-        </div>
-
-        <ul class="wp100 consume_ul" id="consumeUl"></ul>
-    </div>
-    
 	<link rel="import" href="../footer.html?__inline">
     <script>
         require(['app/controller/consume/Consume']);

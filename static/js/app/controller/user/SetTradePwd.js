@@ -1,34 +1,35 @@
 define([
-    'app/controller/base', 'app/util/ajax', 'app/module/loading/loading'
-], function(base, Ajax, loading) {
-    var me = this,
-        handleSend = {};
-    $("#verification").on("change", validate_verification);
+    'app/controller/base',
+    'app/interface/GeneralCtr',
+    'app/interface/UserCtr'
+], function(base, GeneralCtr, UserCtr) {
+    init();
+    function init() {
+        addListeners();
+    }
+    function addListeners() {
+        $("#verification").on("change", validate_verification);
 
-    $("#password").on("change", validate_password).on("focus", function() {
-        $(this).siblings(".register_verifycon").css({"display": "block"});
-    }).on("blur", function() {
-        $(this).siblings(".register_verifycon").css({"display": "none"});
-    });
-    $("#repassword").on("change", validate_repassword).on("focus", function() {
-        $(this).siblings(".register_verifycon").css({"display": "block"});
-    }).on("blur", function() {
-        $(this).siblings(".register_verifycon").css({"display": "none"});
-    });
-    $("#sbtn").on("click", function() {
-        setTradePwd();
-    });
-    $("#getVerification").one("click", handleSendVerifiy);
+        $("#password").on("change", validate_password).on("focus", function() {
+            $(this).siblings(".register_verifycon").css({"display": "block"});
+        }).on("blur", function() {
+            $(this).siblings(".register_verifycon").css({"display": "none"});
+        });
+        $("#repassword").on("change", validate_repassword).on("focus", function() {
+            $(this).siblings(".register_verifycon").css({"display": "block"});
+        }).on("blur", function() {
+            $(this).siblings(".register_verifycon").css({"display": "none"});
+        });
+        $("#sbtn").on("click", function() {
+            setTradePwd();
+        });
+        $("#getVerification").one("click", handleSendVerifiy);
+    }
+
     function handleSendVerifiy() {
         $("#getVerification").addClass("cancel-send");
-        Ajax.post('805904', {
-            json: {
-                "mobile": sessionStorage.getItem("m"),
-                "bizType": "805045",
-                "kind": "f1"
-            }
-        }).then(function(response) {
-            if (response.success) {
+        GeneralCtr.sendCaptcha("805045", sessionStorage.getItem("m"))
+            .then(function() {
                 for (var i = 0; i <= 60; i++) {
                     (function(i) {
                         setTimeout(function() {
@@ -40,13 +41,12 @@ define([
                         }, 1000 * i);
                     })(i);
                 }
-            } else {
+            }, function(){
                 $("#getVerification").one("click", handleSendVerifiy);
                 var parent = $("#verification").parent();
                 var span = parent.find("span.warning")[2];
                 $(span).fadeIn(150).fadeOut(3000);
-            }
-        });
+            });
     }
     function validate_verification() {
         var elem = $("#verification")[0],
@@ -103,7 +103,6 @@ define([
         return false;
     }
     function doSuccess() {
-        // $("#sbtn").text("设置");
         base.showMsg("交易密码设置成功！");
         setTimeout(function() {
             base.getBack();
@@ -111,23 +110,12 @@ define([
     }
     function setTradePwd() {
         if (validate()) {
-            //   	$("#sbtn").attr("disabled", "disabled").text("设置中...");
-            loading.createLoading("设置中...");
-            var param = {
-                "tradePwd": $("#password").val(),
-                "smsCaptcha": $("#verification").val(),
-                'userId': base.getUserId(),
-                "tradePwdStrength": base.calculateSecurityLevel($("#password").val())
-            };
-            Ajax.post('805045', {json: param}).then(function(response) {
-                loading.hideLoading();
-                if (response.success) {
+            base.showLoading("设置中...");
+            UserCtr.setTradePwd($("#password").val(), $("#verification").val())
+                .then(function() {
+                    base.hideLoading();
                     doSuccess();
-                } else {
-                    // $("#sbtn").removeAttr("disabled").text("设置");
-                    base.showMsg(response.msg);
-                }
-            });
+                });
         }
     }
 });

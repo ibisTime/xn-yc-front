@@ -1,53 +1,31 @@
 define([
     'app/controller/base',
-    'app/util/ajax', 
-    'app/module/loading/loading',
-    'app/module/judgeBindMobile/judgeBindMobile',
-    'app/module/foot/foot',
-], function(base, Ajax, loading, JudgeBindMobile, Foot) {
-	
-	Foot.addFoot(3);
-    initView();
+    'app/module/foot',
+    'app/interface/UserCtr',
+    'app/interface/AccountCtr',
+    'app/interface/GeneralCtr'
+], function(base, Foot, UserCtr, AccountCtr, GeneralCtr) {
 
-    function initView() {
-        loading.createLoading();
-        $.when(
-            getUserInfo(),
-            getAccount(),
-            getMobile()
-        ).then(loading.hideLoading, loading.hideLoading);
+    init();
+
+    function init() {
+        Foot.addFoot(3);
+        base.showLoading();
+        $.when(getUserInfo(), getAccount(), getMobile()).then(base.hideLoading, base.hideLoading);
         addListener();
-        
-//      $("#demo").click(function(){
-//      	JudgeBindMobile.addCont({
-//              success: function(resMobile, resSms){
-//              	mobile = resMobile;
-//              	smsCaptcha = resSms;
-//              	alert("smsCaptcha1"+smsCaptcha+",mobile1"+mobile);
-//              	getAppID();
-//              }
-//          }).showCont();
-//      })
-        
     }
     // 获取手机号
-    function getMobile(){
-        return Ajax.get("807717", {
-            "ckey": "telephone"
-        }).then(function(res){
-            loading.hideLoading();
-            if(res.success){
-                $("#telephone").html('<a href="tel://'+res.data.note+'">'+res.data.note+'</a>');
-            }else{
-                base.showMsg(res.msg);
-            }
-        });
+    function getMobile() {
+        return GeneralCtr.getSysConfig("telephone")
+            .then(function(data) {
+                base.hideLoading();
+                $("#telephone").html('<a href="tel://' + data.note + '">' + data.note + '</a>');
+            });
     }
     // 获取账户信息
     function getAccount() {
-        return Ajax.get("802503", {userId: base.getUserId()}).then(function(res) {
-            if (res.success) {
-                var data = res.data;
+        return AccountCtr.getAccount()
+            .then(function(data) {
                 data.forEach(function(d, i) {
                     if (d.currency == "CNY") {
                         $("#cnyAmount").html(base.formatMoneyD(d.amount));
@@ -55,25 +33,16 @@ define([
                         $("#cbAmount").html(base.formatMoneyD(d.amount));
                     }
                 })
-            }
-        });
-    }
-    // 获取用户信息
-    function getUserInfo(){
-        return base.getUser()
-            .then(function(res) {
-                if (res.success) {
-                    var data = res.data;
-                    $("#nickName").text(data.nickname);
-                    $("#userImg").attr("src", base.getImg(res.data.userExt.photo))
-                    $("#mobile").text(data.mobile);
-                    sessionStorage.setItem("m", data.mobile);
-                } else {
-                    base.showMsg(res.msg || "暂时无法获取用户信息！");
-                }
             });
     }
-    function addListener(){
-    	
+    // 获取用户信息
+    function getUserInfo() {
+        return UserCtr.getUser().then(function(data) {
+            $("#nickName").text(data.nickname);
+            $("#userImg").attr("src", base.getImg(data.userExt.photo))
+            $("#mobile").text(data.mobile);
+            sessionStorage.setItem("m", data.mobile);
+        });
     }
+    function addListener() {}
 });

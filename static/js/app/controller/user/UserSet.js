@@ -1,13 +1,4 @@
 define([
-    'app/controller/base',
-    'app/util/ajax'
-], function(base, Ajax) {
-	
-	
-	init();
-	
-	function init(){
-		
-	}
-	
-});
+    'app/controller/base'
+], function(base) {
+})
