@@ -2,12 +2,14 @@ define([
     'app/controller/base',
     'swiper',
     'app/module/weixin',
+    'app/module/addSub',
     'app/interface/MallCtr'
-], function(base, Swiper, weixin, MallCtr) {
-    var mySwiper,
-        rspData,
-        user,
-        code = base.getUrlParam("code");
+], function(base, Swiper, weixin, addSub, MallCtr) {
+    var rspData,
+        code = base.getUrlParam("code"),
+        productSpecsCode,
+        quantity = 1,
+        code2productSpecs = {};
 
     init();
 
@@ -32,83 +34,68 @@ define([
         });
     }
     function addListeners() {
-        // 购买
+        var _popCont = $("#popCont");
+        // 点击购买，弹出规格选择框
         $("#buyBtn").click(function() {
-            if (!$(this).hasClass("no-buy-btn")) {
-                if(rspData.category == "FL2017062717580920664616"){
-                    base.showLoading("下单中...");
-                    MallCtr.submitOrder({
-                        productSpecsCode: rspData.productSpecsList[0].code,
-                        quantity: 1,
-                        toUser: SYSTEM_USERID,
-                        pojo: {
-                            applyUser: base.getUserId(),
-                            companyCode: SYSTEM_CODE,
-            	            systemCode: SYSTEM_CODE
-                        }
-                    }).then((data) => {
-                        base.hideLoading();
-                        var code = data.code || data;
-                        location.href = '../pay/pay_order.html?code=' + code;
-                    });
-                }else{
-                    location.href = "./submit_order.html?code=" + code + "&q=" + $("#buyCount").val();
-                }
+            _popCont.removeClass("hide").addClass("show");
+        });
+        _popCont.find(".sku-closed").click(function(){
+            _popCont.removeClass("show").addClass("hide");
+        });
+
+        (function(){
+            var _tip = $("#chose-tip"),
+                _price = $("#chose-price"),
+                _name = $("#chose-name");
+            // 选择商品类别
+            _popCont.find("ul").on("click", "li", function(){
+                var self = $(this);
+                self.removeClass("normal").addClass("sel")
+                    .siblings(".sel").removeClass("sel").addClass("normal");
+                _tip.empty();
+                _name.text("已选：" + self.text());
+                productSpecsCode = self.attr("code");
+
+                var productSpecs = code2productSpecs[productSpecsCode];
+                var price2 = base.formatMoneyD(productSpecs.price2) + "橙券",
+                    price1 = base.formatMoneyD(productSpecs.price1) + "元";
+                _price.text(price2 + "/" + price1);
+            });
+        })();
+        // 购买
+        $("#pop-buy").click(function(){
+            if(!productSpecsCode){
+                base.showMsg("未选择商品");
+                return;
+            }
+            // 果树认购
+            if(rspData.category == GSRG){
+                base.showLoading("下单中...");
+                MallCtr.submitOrder({
+                    productSpecsCode,
+                    quantity: 1,
+                    toUser: SYSTEM_USERID,
+                    pojo: {
+                        applyUser: base.getUserId(),
+                        companyCode: SYSTEM_CODE,
+        	            systemCode: SYSTEM_CODE
+                    }
+                }).then((data) => {
+                    base.hideLoading();
+                    var code = data.code || data;
+                    location.href = '../pay/pay_order.html?code=' + code;
+                });
+            }else{
+                location.href = `./submit_order.html?code=${code}&q=${quantity || 1}&spec=${productSpecsCode}`;
             }
         });
-        $("#subCount").on("click", function() {
-            var orig = $("#buyCount").val();
-            if (orig == undefined || orig == "" || orig == "0" || orig == "1") {
-                orig = 2;
-            }
-            orig = +orig - 1;
-            $("#buyCount").val(orig);
-            $("#buyCount").change();
 
-            var msl = rspData;
-            var buyCount = $("#buyCount").val();
-            var CB = (msl.price2 / 1000) * buyCount + "橙券";
-            var rmb = (msl.price1 / 1000) * buyCount + "元";
-
-            $(".CB").html(CB + "/" + rmb);
-        });
-        $("#addCount").on("click", function() {
-            var orig = $("#buyCount").val();
-            if (orig == undefined || orig == "") {
-                orig = 0;
-            }
-            orig = +orig + 1;
-            $("#buyCount").val(orig);
-            $("#buyCount").change();
-
-            var msl = rspData;
-            var buyCount = $("#buyCount").val();
-            var CB = (msl.price2 / 1000) * buyCount + "橙券";
-            var rmb = (msl.price1 / 1000) * buyCount + "元";
-
-            $(".CB").html(CB + "/" + rmb);
-
-        });
-        $("#buyCount").on("keyup", function(e) {
-            var keyCode = e.charCode || e.keyCode;
-            var me = $(this);
-            if (!isSpecialCode(keyCode) && !isNumber(keyCode)) {
-                me.val(me.val().replace(/[^\d]/g, ""));
-            }
-            if (!me.val()) {
-                me.change();
-            }
-        }).on("change", function(e) {
-            var keyCode = e.charCode || e.keyCode;
-            var me = $(this);
-            if (!isSpecialCode(keyCode) && !isNumber(keyCode)) {
-                me.val(me.val().replace(/[^\d]/g, ""))
-            }
-            if (!me.val()) {
-                me.val("1");
-            }
-            if (me.val() == "0") {
-                me.val("1");
+        addSub.createByEle({
+            sub: $("#subCount"),
+            add: $("#addCount"),
+            input: $("#buyCount"),
+            changeFn: function () {
+                quantity = this.value;
             }
         });
     }
@@ -116,55 +103,39 @@ define([
     //生成页面
     function addHtml() {
         var msl = rspData,
-            pics = msl.pic;
+            pics = msl.pic,
+            html = "",
+            productSpecsList = msl.productSpecsList;
 
         pics = pics.split("||");
-        if (!mySwiper) {
-            var html = "";
-            $.each(pics, function(i, val) {
-                html += '<div class="swiper-slide tc"><img src="' + base.getImg(val, 1) + '"></div>';
-            })
-            $("#btlImgs").append(html);
-            mySwiper = new Swiper('.swiper-container', {
-                'direction': 'horizontal',
-                'pagination': '.swiper-pagination'
-            });
-        }
+        $.each(pics, function(i, val) {
+            html += '<div class="swiper-slide tc"><img src="' + base.getImg(val, 1) + '"></div>';
+        });
+        $("#btlImgs").html(html);
+        new Swiper('.swiper-container', {
+            'direction': 'horizontal',
+            'pagination': '.swiper-pagination'
+        });
+
         $("#btr-name").text(msl.name);
         $("#btr-slogan").text(msl.slogan);
-
-        var price2 = msl.price2 / 1000 + "橙券",
-            price1 = msl.price1 / 1000 + "元";
+        var price2 = base.formatMoneyD(msl.price2) + "橙券",
+            price1 = base.formatMoneyD(msl.price1) + "元";
         $("#discountPrice").text(price2);
-        $("#cnyPrice").text(price1);
-
+        $("#cnyPrice").text("/" + price1);
+        $("#chose-price").text(price2 + "/" + price1);
         $("#btr-description").append(msl.description);
 
-        var buyCount = $("#buyCount").val();
-
-        if(msl.category == "FL2017062716471159133341" || msl.category == "FL2017062717580920664616"){
-            buyCount = 1;
-            $("#operatorWrap").hide();
+        // 配送计划 或 果树认购
+        if(msl.category == PSJH || msl.category == GSRG){
             $("#btr-desc").removeClass("hidden").html(msl.strain + " | " + msl.logisticsDate);
         }
-
-        var CB = (msl.price2 / 1000) * buyCount + "橙券";
-        var rmb = (msl.price1 / 1000) * buyCount + "元";
-
-        $(".CB").html(CB + "/" + rmb);
-    }
-
-    function isNumber(code) {
-        if (code >= 48 && code <= 57 || code >= 96 && code <= 105) {
-            return true;
-        }
-        return false;
-    }
-
-    function isSpecialCode(code) {
-        if (code == 37 || code == 39 || code == 8 || code == 46) {
-            return true;
-        }
-        return false;
+        html = "";
+        productSpecsList.forEach(function(productSpecs){
+            code2productSpecs[productSpecs.code] = productSpecs;
+            html += `<li class="normal" code="${productSpecs.code}">${productSpecs.name}</li>`;
+        });
+        $("#chose-img").html(`<img src="${base.getImg(msl.advPic, 1)}"/>`)
+        $("#productSpecs").html(html);
     }
 });

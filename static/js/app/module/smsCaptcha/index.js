@@ -25,7 +25,7 @@ define([
         id: "getVerification",
         mobile: "mobile",
         checkInfo: function () {
-            return $("#" + this.options.mobile).valid();
+            return $("#" + this.mobile).valid();
         },
         sendCode: '805904'
     };

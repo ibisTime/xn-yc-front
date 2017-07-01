@@ -31,16 +31,7 @@ define([
                 location.href = "../user/user_info.html";
             }
             //订单相关商品信息
-            var productSpecs = data.productSpecs;
-            var html = '<ul><li class="ptb8 clearfix b_bd_b plr10" modelCode="' + productSpecs.productCode + '">' +
-                        '<a class="show p_r min-h100p" href="../operator/buy.html?code=' + productSpecs.productCode + '">' +
-                            '<div class="order-img-wrap tc default-bg"><img class="center-img1" src="' + base.getImg(data.product.advPic) + '"/></div>' +
-                            '<div class="order-right-wrap clearfix">'+
-                                '<div class="fl wp60"><p class="tl line-tow">' + data.product.name + '</p></div>' +
-                                '<div class="fl wp40 tr s_11">';
-            html += '<p class="item_totalP">' + base.formatMoneyD(productSpecs.price2) + '橙券</span><br/>或<span class="item_totalP">' + base.formatMoney(productSpecs.price1) + '元</span></p>';
-            html += '<p class="t_80">×<span>' + data.quantity + '</span></p></div></div></a></li></ul>'
-
+            var html = buildHtml(data);
             $("footer, #items-cont").removeClass("hidden");
             $("#items-cont").append(loadImg.loadImg(html));
 
@@ -49,14 +40,51 @@ define([
             $("#totalAmount").html(CBAmount);
 
             //添加地址信息
-            var addrHtml = '<p><span class="pr2em">总计</span>：<span class="pl_5rem">' + base.formatMoney(data.amount2) + "橙券/" + base.formatMoney(data.amount1) + "元" + '<span></span></p>' + '<p><span class="pr1em">订单号</span>：<span class="pl_5rem">' + data.code + '</span></p>';
-            if (data.reAddress) {
-                addrHtml += '<p><span>配送信息：</span><span class="pl_5rem">' + data.receiver + '</span><span class="pl10">' + data.reMobile + '</span></p>' + '<p class="pl5_5rem t_73 s_09_5">' + data.reAddress + '</p>';
-            }
+            var addrHtml = buildAddrHtml(data);
             $("#addressDiv").html(addrHtml);
         }, function(){
             doError("#container");
         });
+    }
+    // 生成商品html
+    function buildHtml(data) {
+        var productSpecs = data.productSpecs;
+        return `<ul>
+                    <li class="ptb8 clearfix b_bd_b plr10" modelCode="${productSpecs.productCode}">
+                        <a class="show p_r min-h100p" href="../operator/buy.html?code=${productSpecs.productCode}">
+                            <div class="order-img-wrap tc default-bg">
+                                <img class="center-img1" src="${base.getImg(data.product.advPic)}"/>
+                            </div>
+                            <div class="order-right-wrap clearfix">
+                                <div class="fl wp60"><p class="tl line-tow">${data.product.name}</p></div>
+                                <div class="fl wp40 tr s_11">
+                                    <p class="item_totalP">
+                                        <span>${base.formatMoneyD(productSpecs.price2)}橙券</span><br/>或
+                                        <span class="item_totalP">${base.formatMoney(productSpecs.price1)}元</span>
+                                    </p>
+                                    <p class="t_80">×<span>${data.quantity}</span></p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>`;
+    }
+    // 生成地址html
+    function buildAddrHtml(data) {
+        return `<p>
+                    <span class="pr2em">总计</span>：
+                    <span class="pl_5rem">${base.formatMoney(data.amount2)}橙券/${base.formatMoney(data.amount1)}元<span>
+                </p>
+                <p><span class="pr1em">订单号</span>：<span class="pl_5rem">${data.code}</span></p>
+                ${
+                    data.reAddress
+                        ? `<p>
+                            <span>配送信息：</span>
+                            <span class="pl_5rem">${data.receiver}</span>
+                            <span class="pl10">${data.reMobile}</span>
+                        </p><p class="pl5_5rem t_73 s_09_5">${data.reAddress}</p>`
+                        : ""
+                }`;
     }
 
     // 获取账户信息

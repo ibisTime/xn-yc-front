@@ -24,7 +24,7 @@ define([
     }
 
     function initView() {
-        getOrderList().then(base.hideLoading);
+        getPageOrders().then(base.hideLoading);
         addListener();
     }
 
@@ -34,7 +34,7 @@ define([
             if (canScrolling && !isEnd && ($(document).height() - $(window).height() - 10 <= $(document).scrollTop())) {
                 canScrolling = false;
                 addLoading();
-                getOrderList();
+                getPageOrders();
             }
         });
         $("#ol-ul").on("click", "li span.ol-tobuy", function(e) {
@@ -44,8 +44,8 @@ define([
             location.href = "../detail/recharge_cardPay.html?code=" + me.closest("li[code]").attr("code") + "&a=" + me.closest("li[code]").attr("price") + "&rate=" + me.closest("li[code]").attr("rate");
         });
     }
-
-    function getOrderList() {
+    // 分页获取订单
+    function getPageOrders() {
         return MallCtr.getPageRechargeOrders(config)
             .then(function(data) {
                 var html = "",
@@ -56,40 +56,7 @@ define([
                 }
                 if (curList.length) {
                     curList.forEach(function(cl) {
-                        var invoice = cl,
-                            totalAmount = cl.amount2,
-                            totalJFAmount = cl.amount3,
-                            code = cl.code,
-                            text1 = "加油卡号：",
-                            text2 = "加油姓名：";
-
-                        if (invoice.product.type == 3) {
-                            text1 = "手机号：";
-                            text2 = "姓名：";
-                        }
-
-                        html += '<li class="clearfix b_bd_b b_bd_t bg_fff mb10" code="' + code + '" price="' + invoice.amount / 1000 + '" rate="' + invoice.product.rate + '">'+
-                            '<a class="show plr10" href="./vorder_detail.html?code=' + code + '" class="show">'+
-                                '<div class="wp100 b_bd_b clearfix ptb10">'+
-                                    '<div class="fl">订单号：<span>' + code + '</span></div>'+
-                                '</div>'+
-                                '<div class="wp100 clearfix ptb4 p_r min-h100p">'+
-                                    '<div class="order-img-wrap ml10 tc default-bg">'+
-                                        '<img class="center-img1" src="' + base.getImg(invoice.product.advPic) + '"/>'+
-                                    '</div>'+
-                                    '<div class="order-right-wrap clearfix">'+
-                                        '<div class="fl wp100 pt12">'+
-                                            '<p class="tl line-tow">' + text1 + invoice.reCardno + '</p>'+
-                                            '<p class="tl line-tow">' + text2 + invoice.reName + '</p>'+
-                                            '<p class="tl line-tow">充值面额：' + invoice.amount / 1000 + '</p>'+
-                                        '</div>'+
-                                    '</div>'+
-                                    '<div class="wp100 clearfix ptb6 mt1emys">'+
-                                        '<span class="fr inline_block bg_f64444 t_white s_10 plr8 ptb4 b_radius4 ' + (invoice.status == "0" ? "ol-tobuy" : "") + '">'+
-                                            base.getDictListValue(invoice.status, dictData) + '</span>'+
-                                    '</div>'+
-                                '</div></a></li>';
-
+                        html += buildHtml(cl);
                     });
                     $("#ol-ul").append(loadImg.loadImg(html));
                     config.start += 1;
@@ -104,6 +71,41 @@ define([
                     doError();
                 }
             }).always(removeLoading);
+    }
+
+    function buildHtml(invoice) {
+        var code = invoice.code,
+            text1 = "加油卡号：",
+            text2 = "加油姓名：";
+
+        if (invoice.product.type == 3) {
+            text1 = "手机号：";
+            text2 = "姓名：";
+        }
+        return `<li class="clearfix b_bd_b b_bd_t bg_fff mb10" code="${code}" price="${invoice.amount / 1000}" rate="${invoice.product.rate}">
+                    <a class="show plr10" href="./vorder_detail.html?code=${code}" class="show">
+                        <div class="wp100 b_bd_b clearfix ptb10">
+                            <div class="fl">订单号：<span>${code}</span></div>
+                        </div>
+                        <div class="wp100 clearfix ptb4 p_r min-h100p">
+                            <div class="order-img-wrap ml10 tc default-bg">
+                                <img class="center-img1" src="${base.getImg(invoice.product.advPic)}"/>
+                            </div>
+                            <div class="order-right-wrap clearfix">
+                                <div class="fl wp100 pt12">
+                                    <p class="tl line-tow">${text1 + invoice.reCardno}</p>
+                                    <p class="tl line-tow">${text2 + invoice.reName}</p>
+                                    <p class="tl line-tow">充值面额：${invoice.amount / 1000}</p>
+                                </div>
+                            </div>
+                            <div class="wp100 clearfix ptb6 mt1emys">
+                                <span class="fr inline_block bg_f64444 t_white s_10 plr8 ptb4 b_radius4 ${invoice.status == "0" ? "ol-tobuy" : ""}">
+                                    ${base.getDictListValue(invoice.status, dictData)}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </li>`;
     }
 
     function addLoading() {

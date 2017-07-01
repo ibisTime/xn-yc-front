@@ -32,7 +32,7 @@ define([
             $("#ol-ul").empty();
             $("#noItem").addClass("hidden");
             addLoading();
-            getOrderList();
+            getPageOrders();
             e.stopPropagation();
         });
         $(window).on("scroll", function() {
@@ -40,7 +40,7 @@ define([
             if (canScrolling && !isEnd && ($(document).height() - $(window).height() - 10 <= $(document).scrollTop())) {
                 canScrolling = false;
                 addLoading();
-                getOrderList();
+                getPageOrders();
             }
         });
         $("#ol-ul").on("click", "li span.ol-tobuy", function(e) {
@@ -51,7 +51,7 @@ define([
         });
     }
 
-    function getOrderList() {
+    function getPageOrders() {
         MallCtr.getPageOrders(config)
             .then(function(data) {
                 var html = "",
@@ -62,24 +62,7 @@ define([
                 }
                 if (curList.length) {
                     curList.forEach(function(invoice) {
-                        var totalAmount = invoice.amount2,
-                            totalJFAmount = invoice.amount3,
-                            code = invoice.code;
-                        html += '<li class="clearfix b_bd_b b_bd_t bg_fff mt10" code="' + code + '">' +
-                            '<a class="show plr10" href="./order_detail.html?code=' + code + '" class="show">' +
-                            '<div class="wp100 b_bd_b clearfix ptb10">' +
-                            '<div class="fl">订单号：<span>' + code + '</span></div></div>' +
-                            '<div class="wp100 clearfix ptb4 p_r min-h100p">' +
-                            '<div class="order-img-wrap tc default-bg top15"><img class="center-img1" src="' + base.getImg(invoice.product.advPic) + '"></div>' +
-                            '<div class="order-right-wrap clearfix"><div class="fl wp60 pt12">' +
-                            '<p class="tl line-tow">' + invoice.product.name + '</p></div>' +
-                            '<div class="fl wp40 tr pt12"><p class="item_totalP">' + base.formatMoneyD(invoice.productSpecs.price2) + '橙券</span><br/>或<span class="item_totalP">' + base.formatMoneyD(invoice.productSpecs.price1) + '元</span>'+
-                       		'<p class="t_80">×<span>' + invoice.quantity + '</span></p>' +
-                            '<p>&nbsp;</p>' +
-                            '<p class="ol_total_p right0">总计:<span class="pl4">' + base.formatMoneyD(invoice.amount2) + '橙券/' + base.formatMoneyD(invoice.amount1) + '元' + '</span></p></div></div></div>'+
-                            '<div class="wp100 clearfix ptb6 mt1em ">' +
-                            '<span class="fr inline_block bg_f64444 t_white s_10 plr8 ptb4 b_radius4 ' + (invoice.status == "1" ? "ol-tobuy" : "") + '">' + getStatus(invoice.status) + '</span></div>' +
-                            '</a></li>';
+                        html += buildHtml(invoice);
                     });
                     $("#ol-ul").append(loadImg.loadImg(html));
                     config.start += 1;
@@ -94,6 +77,41 @@ define([
                     doError();
                 }
             }).always(removeLoading);
+    }
+
+    function buildHtml(invoice){
+        var code = invoice.code;
+        return `<li class="clearfix b_bd_b b_bd_t bg_fff mt10" code="${code}">
+                    <a class="show plr10" href="./order_detail.html?code=${code}" class="show">
+                        <div class="wp100 b_bd_b clearfix ptb10">
+                            <div class="fl">订单号：<span>${code}</span></div>
+                        </div>
+                        <div class="wp100 clearfix ptb4 p_r min-h100p">
+                            <div class="order-img-wrap tc default-bg top15">
+                                <img class="center-img1" src="${base.getImg(invoice.product.advPic)}"/>
+                            </div>
+                            <div class="order-right-wrap clearfix">
+                                <div class="fl wp60 pt12">
+                                    <p class="tl line-tow">${invoice.product.name}</p>
+                                </div>
+                                <div class="fl wp40 tr pt12">
+                                    <p class="item_totalP">
+                                        <span>${base.formatMoneyD(invoice.productSpecs.price2)}橙券</span>
+                                        <br/>或<span class="item_totalP">${base.formatMoneyD(invoice.productSpecs.price1)}元</span>
+                                    </p>
+                                    <p class="t_80">×<span>${invoice.quantity}</span></p>
+                                    <p>&nbsp;</p>
+                                    <p class="ol_total_p right0">总计:
+                                        <span class="pl4">${base.formatMoneyD(invoice.amount2)}橙券/${base.formatMoneyD(invoice.amount1)}元</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wp100 clearfix ptb6 mt1em ">
+                            <span class="fr inline_block bg_f64444 t_white s_10 plr8 ptb4 b_radius4 ${invoice.status == "1" ? "ol-tobuy" : ""}">${getStatus(invoice.status)}</span>
+                        </div>
+                    </a>
+                </li>`;
     }
 
     function addLoading() {

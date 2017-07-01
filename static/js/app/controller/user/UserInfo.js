@@ -10,16 +10,30 @@ define([
 
     function init() {
         Foot.addFoot(3);
-        base.showLoading();
-        $.when(getUserInfo(), getAccount(), getMobile()).then(base.hideLoading, base.hideLoading);
-        addListener();
+        base.showLoading("加载中...", 1);
+        $.when(
+            getUserInfo(),
+            getAccount()
+        ).then(base.hideLoading);
+        $.when(
+            getMobile(),
+            getServiceTime()
+        ).then(() => {
+            $("#infos").removeClass("hidden");
+        });
     }
     // 获取手机号
     function getMobile() {
         return GeneralCtr.getSysConfig("telephone")
             .then(function(data) {
-                base.hideLoading();
                 $("#telephone").html('<a href="tel://' + data.note + '">' + data.note + '</a>');
+            });
+    }
+    // 获取服务时间
+    function getServiceTime() {
+        return GeneralCtr.getSysConfig("serviceTime")
+            .then(function(data) {
+                $("#time").html(data.note);
             });
     }
     // 获取账户信息
@@ -44,5 +58,4 @@ define([
             sessionStorage.setItem("m", data.mobile);
         });
     }
-    function addListener() {}
 });

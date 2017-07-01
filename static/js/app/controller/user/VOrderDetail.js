@@ -33,15 +33,6 @@ define([
 
             $("#orderDate").text(base.formatDate(data.applyDatetime, "yyyy-MM-dd hh:mm:ss"));
             $("#orderStatus").text(base.getDictListValue(data.status, dictData));
-            /*
-                "1": "待支付",
-                "2": "待发货",
-                "3": "待收货",
-                "4": "已收货",
-                "91": "用户取消",
-                "92": "商户取消",
-                "93": "快递异常"
-            */
             //待支付(可取消)
             if (data.status == "0") {
                 $("footer").removeClass("hidden");
@@ -61,30 +52,36 @@ define([
                 $("#applyNoteInfo").text(data.applyNote);
             }
             //商品信息
-            var text1 = "加油卡号：",
-                text2 = "加油姓名：";
-            if (data.product.type == 3) {
-                text1 = "手机号：";
-                text2 = "姓名：";
-            }
-            var html = '<ul><li class="ptb8 clearfix b_bd_b" modelCode="' + data.product.code + '">'+
-                '<a class="show p_r min-h100p" href="../detail/recharge_cardDetail.html?code=' + data.product.code + '">'+
-                    '<div class="order-img-wrap ml10 tc default-bg mr10">'+
-                        '<img class="center-img1" src="' + base.getImg(data.product.advPic) + '"/>'+
-                    '</div>'+
-                    '<div class="order-right-wrap clearfix">'+
-                        '<div class="fl wp100 plr10">'+
-                            '<p class="tl line-tow pt10">' + text1 + data.reCardno + '</p>'+
-                            '<p class="tl line-tow pt6">' + text2 + data.reName + '</p>'+
-                            '<p class="tl line-tow pt6">充值面额：' + data.amount / 1000 + '</p>'+
-                        '</div>'+
-                    '</div></a></li></ul>';
-
-            $("#od-ul").append(loadImg.loadImg(html));
+            $("#od-ul").append(loadImg.loadImg(buildHtml(data)));
             $("#totalAmount").html(base.formatMoney(data.amount * data.product.rate) + "橙券");
 
             $("#od-id").html(data.code);
         });
+    }
+
+    function buildHtml(data) {
+        var text1 = "加油卡号：",
+            text2 = "加油姓名：";
+        if (data.product.type == 3) {
+            text1 = "手机号：";
+            text2 = "姓名：";
+        }
+        return `<ul>
+                    <li class="ptb8 clearfix b_bd_b" modelCode="${data.product.code}">
+                        <a class="show p_r min-h100p" href="../detail/recharge_cardDetail.html?code=${data.product.code}">
+                            <div class="order-img-wrap ml10 tc default-bg mr10">
+                                <img class="center-img1" src="${base.getImg(data.product.advPic)}"/>
+                            </div>
+                            <div class="order-right-wrap clearfix">
+                                <div class="fl wp100 plr10">
+                                    <p class="tl line-tow pt10">${text1 + data.reCardno}</p>
+                                    <p class="tl line-tow pt6">${text2 + data.reName}</p>
+                                    <p class="tl line-tow pt6">充值面额：${data.amount / 1000}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>`;
     }
 
     function addListener() {

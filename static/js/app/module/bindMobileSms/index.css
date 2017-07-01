@@ -1,13 +1,9 @@
-*{
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-}
 input, button {
     -webkit-appearance: none;
     border: none;
     outline: none;
 }
+
 .right-left-cont {
     position: absolute;
     top: 0;
@@ -18,6 +14,7 @@ input, button {
     z-index: 1024;
     background-color: #f0f0f0;
 }
+
 .right-left-cont-title {
     height: 40px;
     line-height: 40px;
@@ -27,6 +24,7 @@ input, button {
     border-bottom: 1px solid #ededed;
     background-color: #fff;
 }
+
 .right-left-cont-back {
     width: 40px;
     height: 40px;
@@ -38,13 +36,16 @@ input, button {
     top: 0;
     background-size: 12px;
 }
+
 .right-left-cont-title-name {
     text-align: center;
     color: #333;
 }
+
 .right-left-cont-info {
     border-top: 1px solid #ededed;
 }
+
 .right-left-cont-info-input-wrap {
     height: 50px;
     background-color: #fff;
@@ -52,12 +53,14 @@ input, button {
     line-height: 50px;
     position: relative;
 }
+
 .right-left-cont-info-input-left {
     padding-left: 15px;
     padding-right: 15px;
     color: #484848;
     font-size: 15px;
 }
+
 .right-left-cont-info-input-right {
     position: absolute;
     width: 100%;
@@ -65,8 +68,8 @@ input, button {
     left: 0;
     top: 0;
 }
-.right-left-cont-info-input-right input[type=text],
-.right-left-cont-info-input-right input[type=number] {
+
+.right-left-cont-info-input-right input[type=text], .right-left-cont-info-input-right input[type=number], .right-left-cont-info-input-right input[type=tel] {
     width: 100%;
     padding-right: 15px;
     color: #484848;
@@ -74,9 +77,11 @@ input, button {
     /*line-height: 50px;*/
     background-color: transparent;
 }
+
 .pr110 {
     padding-right: 110px;
 }
+
 .captcha-btn {
     position: absolute;
     width: 90px;
@@ -88,6 +93,21 @@ input, button {
     background-color: #F64444;
     border-radius: 3px;
 }
+
 .p-r {
     position: relative;
+}
+
+.right-left-cont-btn-wrap {
+    padding: 30px 15px;
+}
+
+.right-left-cont-btn-wrap input {
+    width: 100%;
+    line-height: 40px;
+    width: 100%;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 14px;
+    background-color: #F64444;
 }

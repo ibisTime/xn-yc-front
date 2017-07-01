@@ -23,7 +23,14 @@ define([
         return MallCtr.getRechargeCards(config).then(function(data) {
             var html = "";
             data.list.forEach(function(v, i) {
-                html += '<li class="ptb8 clearfix b_bd_b plr10">' + '<a class="show p_r min-h100p" href="./recharge_cardDetail.html?code=' + v.code + '"><div class="order-img-wrap tc">' + '<img class="center-img1 wp100" src="' + base.getImg(v.advPic, 1) + '"></div>' + '<div class="order-right-wrap clearfix pt15"><p class="t_323232 s_14 line-tow">' + v.name + '</p>' + '<p class="t_999 s_12 mt10 line-tow">' + v.slogan + '</p></div></a></li>'
+                html += `<li class="ptb8 clearfix b_bd_b plr10">
+                    <a class="show p_r min-h100p" href="./recharge_cardDetail.html?code=${v.code}">
+                        <div class="order-img-wrap tc"><img class="center-img1 wp100" src="${base.getImg(v.advPic, 1)}"></div>
+                        <div class="order-right-wrap clearfix pt15">
+                            <p class="t_323232 s_14 line-tow">${v.name}</p>
+                            <p class="t_999 s_12 mt10 line-tow">${v.slogan}</p>
+                        </div>
+                    </a></li>`;
             });
             $("#contUl").append(loadImg.loadImg(html));
             if (+ data.totalCount <= config.limit || data.list.length < config.limit) {

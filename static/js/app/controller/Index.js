@@ -1,9 +1,10 @@
 define([
     'app/controller/base',
     'app/module/foot',
+    'app/module/weixin',
     'app/interface/GeneralCtr',
     'swiper'
-], function(base, Foot, GeneralCtr, Swiper) {
+], function(base, Foot, weixin, GeneralCtr, Swiper) {
     init();
     function init(){
         Foot.addFoot(2);
@@ -13,6 +14,12 @@ define([
     		getNotice()
     	).then(base.hideLoading, base.hideLoading);
     	addListener();
+        weixin.initShare({
+            title: document.title,
+            desc: document.title,
+            link: location.href,
+            imgUrl: base.getShareImg()
+        });
     }
 
     function addListener(){
@@ -35,10 +42,29 @@ define([
                 	}else{
                 		location.href = url;
                 	}
-
                 }
 
             }
+        });
+        // 当季水果
+        $("#djsg").click(function(){
+            location.href = "detail/mall_list.html?c=" + DJSG;
+        });
+        // 配送计划
+        $("#psjh").click(function(){
+            location.href = "detail/mall_list.html?c=" + PSJH;
+        });
+        // 果树认购
+        $("#gsrg").click(function(){
+            location.href = "detail/mall_list.html?c=" + GSRG;
+        });
+        // 北大荒
+        $("#bdh").click(function(){
+            location.href = "detail/mall_list.html?c=" + BDH;
+        });
+        // 热门活动
+        $("#rmhd").click(function(){
+            location.href = "operator/buy.html?code=" + RMHD;
         });
     }
 
@@ -49,7 +75,7 @@ define([
                 if(data.length){
                     var html = "";
                     data.forEach(function(item){
-                        html += '<div class="swiper-slide"><img data-url= "'+item.url+'" class="wp100" src="' + base.getImg(item.pic, 1) + '"></div>';
+                        html += `<div class="swiper-slide"><img data-url= "${item.url}" class="wp100" src="${base.getImg(item.pic, 1)}"></div>`;
                     });
                     $("#top-swiper").html(html);
                     new Swiper('#swiper-container', {

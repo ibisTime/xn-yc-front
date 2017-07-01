@@ -55,29 +55,7 @@ define([
                 if (list.length) {
                     var html = "";
                     list.forEach(function(d) {
-                        var originalPrice = base.formatMoneyD(d.originalPrice) + "元",
-                            price1 = base.formatMoneyD(d.price1) + "元",
-                            price2 = base.formatMoneyD(d.price2) + "橙券";
-                        html += '<li class="ptb8 clearfix b_bd_b">' +
-                            '<a class="show p_r min-h100p" href="../operator/buy.html?code=' + d.code + '">' +
-                            '<div class="order-img-wrap tc default-bg"><img class="center-img1 center-lazy" src="' + base.getImg(d.advPic) + '"/></div>' +
-                            '<div class="order-right-wrap clearfix">' +
-                                '<div class="am-flexbox am-flexbox-align-top">'+
-                                    '<p class="t_323232 s_12 line-tow am-flexbox-item">' + d.name + '</p>';
-                        if(d.saleStatus){
-                            html += '<p class="item-rt-red">' + d.saleStatus + '</p>';
-                        }
-                        html += '</div>'+
-                            '<p class="t_999 s_10 line-tow">' + d.slogan + '</p>'+
-                            '<p class="t_red ptb4">'+
-                                '<span class="s_12 t_red">' + price2 + '</span>/<span class="s_12 t_red">' + price1 + '</span>'+
-                            '</p>';
-                        if(d.category == "FL2017062716471159133341" || d.category == "FL2017062717580920664616"){
-                            html += '<p>' + d.strain + " | " + d.logisticsDate + '</p>'
-                        }else {
-                            html += '<p class="s_10"  style="text-decoration: line-through;">市场参考价：<span>' + originalPrice + '</span></p>';
-                        }
-                        html += '</div></a></li>';
+                        html += buildHtml(d);
                     });
                     $("#searchUl").append(loadImg.loadImg(html));
                     searchConfig.start += 1;
@@ -92,6 +70,32 @@ define([
                     doError();
                 }
             });
+    }
+
+    function buildHtml(d) {
+        var originalPrice = base.formatMoneyD(d.originalPrice) + "元",
+            price1 = base.formatMoneyD(d.price1) + "元",
+            price2 = base.formatMoneyD(d.price2) + "橙券";
+        return `<li class="ptb8 clearfix b_bd_b">
+                    <a class="show p_r min-h100p" href="../operator/buy.html?code=${d.code}">
+                        <div class="order-img-wrap tc default-bg"><img class="center-img1 center-lazy" src="${base.getImg(d.advPic)}"/></div>
+                        <div class="order-right-wrap am-flexbox am-flexbox-align-top am-flexbox-dir-column am-flexbox-justify-between">
+                            <div class="am-flexbox am-flexbox-align-top wp100">
+                                <p class="t_323232 s_12 line-tow am-flexbox-item ml0i">${d.name}</p>
+                                ${d.saleStatus ? `<p class="item-rt-red">${d.saleStatus}</p>` : ""}
+                            </div>
+                            <p class="t_999 s_10 line-tow">${d.slogan}</p>
+                            <p class="t_red ptb4">
+                                <span class="s_12 t_red">${price2}</span>/<span class="s_12 t_red">${price1}</span>
+                            </p>
+                            ${
+                                d.category == PSJH || d.category == GSRG
+                                    ? `<p>${d.strain} | ${d.logisticsDate}</p>`
+                                    : `<p class="s_10"  style="text-decoration: line-through;">市场参考价：<span>${originalPrice}</span></p>`
+                            }
+                        </div>
+                    </a>
+                </li>`;
     }
 
     function addLoading() {

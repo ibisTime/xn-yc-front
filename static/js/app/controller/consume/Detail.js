@@ -47,35 +47,44 @@ define([
         O2OCtr.getBusiness(code)
             .then(function(data) {
                 base.hideLoading();
-                var dpic = data.pic, strs = dpic.split("||"), html = "";
-                weixin.initShare({
-                    title: data.name,
-                    desc: data.slogan,
-                    link: location.href,
-                    imgUrl: base.getShareImg(dpic)
-                });
+                var dpic = data.pic, strs = dpic.split("||"), html = "", rate1 = data.rate1;
+                // 微信初始化
+                initWeixin(data.name, data.slogan, location.href, base.getShareImg(dpic));
                 if (strs.length > 1) {
-                    for (i = 0; i < strs.length; i++) {
-                        html += '<div class="swiper-slide"><img class="wp100" src="' + base.getImg(strs[i], 1) + PIC_DETAIL + '"></div>';
+                    for (var i = 0; i < strs.length; i++) {
+                        html += `<div class="swiper-slide"><img class="wp100" src="${base.getImg(strs[i], 1) + PIC_DETAIL}"></div>`;
                     }
                     $("#top-swiper").html(html);
-                    new Swiper('#swiper-container', {
-                        'direction': 'horizontal',
-                        'loop': true,
-                        'autoplayDisableOnInteraction': false,
-                        'pagination': '.swiper-pagination'
-                    });
+                    initSwiper();
                 } else {
-                    $("#top-swiper").html('<div class="swiper-slide"><img class="wp100" src="' + base.getImg(dpic, 1) + PIC_DETAIL + '"></div>');
+                    $("#top-swiper").html(`<div class="swiper-slide"><img class="wp100" src="${base.getImg(dpic, 1) + PIC_DETAIL}"></div>`);
                 }
                 $("#name").text(data.name);
                 $("#slogan").text(data.slogan);
                 $("#advert").text(data.advert);
                 $("#address").text(data.address);
-                $("#bookMobile").append('<a class="clearfix" href="tel://' + data.bookMobile + '"><img class="wp16p mr4 va-m" src="/static/images/phone.png"/><span class="pr6 va-m inline_block">' + data.bookMobile + '</span></a>');
+                $("#bookMobile")
+                    .append(`<a class="clearfix" href="tel://${data.bookMobile}">
+                                <img class="wp16p mr4 va-m" src="/static/images/phone.png"/>
+                                <span class="pr6 va-m inline_block">${data.bookMobile}</span>
+                            </a>`);
                 $("#description").html(data.description);
+                rate1 && $("#discount").html(`通过我们，享${rate1 * 10}折`)
                 rate2 = data.rate2;
             }, doError);
+    }
+
+    function initSwiper(){
+        new Swiper('#swiper-container', {
+            'direction': 'horizontal',
+            'loop': true,
+            'autoplayDisableOnInteraction': false,
+            'pagination': '.swiper-pagination'
+        });
+    }
+    // 微信初始化
+    function initWeixin(title, desc, link, imgUrl){
+        weixin.initShare({ title, desc, link, imgUrl });
     }
 
     function doError() {

@@ -9,9 +9,10 @@ define([
 ], function(base, Dict, Handlebars, loadImg, GeneralCtr, UserCtr, MallCtr) {
     var code = base.getUrlParam("code"),
         q = base.getUrlParam("q") || "1",
+        productSpecsCode = base.getUrlParam("spec"),
         userId = base.getUserId(),
         addrInfo = {},
-        toUser = "", productSpecsCode;
+        toUser = "";
     init();
 
     function init() {
@@ -70,27 +71,50 @@ define([
     function getProduct() {
         return MallCtr.getProduct(code)
             .then(function(data) {
-                var html = '';
+                var productSpec;
+                for(var i = 0; i < data.productSpecsList.length; i++){
+                    if(data.productSpecsList[i].code == productSpecsCode){
+                        productSpec = data.productSpecsList[i]
+                    }
+                }
+                if(!productSpec){
+                    productSpec = data.productSpecsList[0];
+                    productSpecsCode = productSpec.code;
+                }
                 //商品总计
-                var totalCBAmount = +data.price2 * +q;
-                var totalCMBAmount = +data.price1 * +q;
+                var totalCBAmount = +productSpec.price2 * +q,
+                    totalCMBAmount = +productSpec.price1 * +q;
                 $("#totalCBAmount").html(base.formatMoney(totalCBAmount) + "橙券/" + base.formatMoney(totalCMBAmount) + "元");
-                html += '<ul>' +
-                    '<li class="ptb8 clearfix  plr10" modelCode="' + data.code + '">' +
-                    '<a href="../operator/buy.html?code=' + data.code + '" class="show p_r min-h100p">' +
-                    '<div class="order-img-wrap tc default-bg"><img class="center-img1" src="' + base.getImg(data.advPic) + '"/></div>' +
-                    '<div class="order-right-wrap clearfix"><div class="fl wp60">' +
-                    '<p class="tl line-tow">' + data.name + '</p>' +
-                    '<p class="tl pt4 line-tow">' + data.slogan + '</p>' +
-                    '</div>' +
-                    '<div class="fl wp40 tr s_10">';
-                html += '<p><span class="item_totalP">' + base.formatMoney(data.price2) + '橙券</span><br/>或<span class="item_totalP">' + base.formatMoney(data.price1) + '元</span></p>';
-                html += '<p class="t_80">×<span>' + q + '</span></p></div></div></a></li></ul>';
+                var html = buildHtml(data, productSpec);
                 $("#items-cont").append(loadImg.loadImg(html));
-                productSpecsCode = data.productSpecsList[0].code;
             }, function(){
                 doError("#items-cont");
             });
+    }
+
+    function buildHtml(data, productSpec){
+        return `<ul>
+                    <li class="ptb8 clearfix  plr10" modelCode="${data.code}">
+                        <a href="../operator/buy.html?code=${data.code}" class="show p_r min-h100p">
+                            <div class="order-img-wrap tc default-bg">
+                                <img class="center-img1" src="${base.getImg(data.advPic)}"/>
+                            </div>
+                            <div class="order-right-wrap clearfix">
+                                <div class="fl wp60">
+                                    <p class="tl line-tow">${data.name}</p>
+                                    <p class="tl pt4 line-tow">${data.slogan}</p>
+                                </div>
+                                <div class="fl wp40 tr s_10">
+                                    <p>
+                                        <span class="item_totalP">${base.formatMoney(productSpec.price2)}橙券</span><br/>或
+                                        <span class="item_totalP">${base.formatMoney(productSpec.price1)}元</span>
+                                    </p>
+                                    <p class="t_80">×<span>${q}</span></p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>`;
     }
 
     function addListeners() {
@@ -189,7 +213,7 @@ define([
             .then(function(data) {
                 base.hideLoading();
                 var code = data.code || data;
-                location.href = '../pay/pay_order.html?code=' + code;
+                location.replace('../pay/pay_order.html?code=' + code);
             });
     }
 });

@@ -21,18 +21,8 @@ define([
     //查询订单
     function getOrder() {
         return MallCtr.getOrder(code).then(function(data) {
-            var productSpecs = data.productSpecs;
             $("#orderDate").text(base.formatDate(data.applyDatetime, "yyyy-MM-dd hh:mm:ss"));
             $("#orderStatus").text(getStatus(data.status));
-            /*
-                "1": "待支付",
-                "2": "待发货",
-                "3": "待收货",
-                "4": "已收货",
-                "91": "用户取消",
-                "92": "商户取消",
-                "93": "快递异常"
-            */
             //待支付(可取消)
             if (data.status == "1") {
                 $("footer").removeClass("hidden");
@@ -59,18 +49,7 @@ define([
                 $(".remake-wrap").removeClass("hidden");
             }
             //商品信息
-            var html = '<ul><li class="ptb8 clearfix b_bd_b plr10" modelCode="' + productSpecs.productCode + '">' +
-                '<a class="show p_r min-h100p" href="../operator/buy.html?code=' + productSpecs.productCode + '">' +
-                    '<div class="order-img-wrap tc default-bg"><img class="center-img1" src="' + base.getImg(data.product.advPic) + '"/></div>' +
-                    '<div class="order-right-wrap clearfix"><div class="fl wp60">' +
-                        '<p class="tl line-tow">' + data.product.name + '</p></div>' +
-                        '<div class="fl wp40 tr s_11">'+
-                            '<p class="item_totalP">' + base.formatMoneyD(productSpecs.price2) + '橙券</span><br/>或<span class="item_totalP">' + base.formatMoney(productSpecs.price1) + '元</span></p>'+
-                            '<p class="t_80">×<span>' + data.quantity + '</span></p>'+
-                        '</div>'+
-                    '</div></a></li></ul>';
-
-            $("#od-ul").append(loadImg.loadImg(html));
+            $("#od-ul").append(loadImg.loadImg(buildHtml(data)));
 
             var CBAmount = base.formatMoney(data.amount2) + "橙券";
             var RMBAmount = base.formatMoney(data.amount1) + "元";
@@ -91,6 +70,32 @@ define([
             }
         });
     }
+
+    function buildHtml(data) {
+        var productSpecs = data.productSpecs;
+        return `<ul>
+                    <li class="ptb8 clearfix b_bd_b plr10" modelCode="${productSpecs.productCode}">
+                        <a class="show p_r min-h100p" href="../operator/buy.html?code=${productSpecs.productCode}">
+                            <div class="order-img-wrap tc default-bg">
+                                <img class="center-img1" src="${base.getImg(data.product.advPic)}"/>
+                            </div>
+                            <div class="order-right-wrap clearfix">
+                                <div class="fl wp60">
+                                    <p class="tl line-tow">${data.product.name}</p>
+                                </div>
+                                <div class="fl wp40 tr s_11">
+                                    <p class="item_totalP">
+                                        <span>${base.formatMoneyD(productSpecs.price2)}橙券</span>
+                                        <br/>或<span class="item_totalP">${base.formatMoney(productSpecs.price1)}元</span>
+                                    </p>
+                                    <p class="t_80">×<span>${data.quantity}</span></p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>`;
+    }
+
     //确认收货
     function confirmReceipt() {
         base.showLoading("确认中...");

@@ -47,9 +47,9 @@ define([
             var html = '<option>请选择</option>';
             for(var i = 0; i < data.length; i++) {
             	if(code && bankName == data[i].bankName){
-            		html += '<option selected value="'+data[i].bankName+'" code="'+data[i].bankCode+'">'+data[i].bankName+'</option>';
+            		html += `<option selected value="${data[i].bankName}" code="${data[i].bankCode}">${data[i].bankName}</option>`;
             	}else{
-            		html += '<option value="'+data[i].bankName+'" code="'+data[i].bankCode+'">'+data[i].bankName+'</option>';
+            		html += `<option value="${data[i].bankName}" code="${data[i].bankCode}">${data[i].bankName}</option>`;
             	}
             }
             $("#bankName").html(html);

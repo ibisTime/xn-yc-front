@@ -44,22 +44,7 @@ define([
             if (data.list.length) {
                 var html = "";
                 $.each(data.list, function(index, item) {
-                    var positive = +item.transAmount >= 0
-                            ? true
-                            : false,
-                        transClass = positive
-                            ? "t_21b504"
-                            : "t_f64444",
-                        prefix = positive && "+" || "";
-                    html += '<li class="plr20 ptb20 b_bd_b clearfix lh15rem">' + '<div class="wp60 fl s_10">' + '<p class="t_4d">' + item.bizNote + '</p>' + '<p class="s_09 t_999 pt10">' + base.formatDate(item.createDatetime, "yyyy-MM-dd hh:mm:ss") + '</p>' + '</div>' + '<div class="wp40 fl tr ' + transClass + ' s_10">';
-                    if (item.bizType == "92") {
-                        prefix = "";
-                    }
-                    html += '<span class="inline_block va-m pt1em">' + prefix + base.formatMoneyD(item.transAmount) + '元</span>'
-                    if (item.bizType == "-11" && item.fee) {
-                        html += '<br/><span class="inline_block va-m s_09">手续费' + base.formatMoneyD(item.fee) + '元</span>'
-                    };
-                    html += '</div></li>';
+                    html += buildHtml(item);
                 });
                 $("#fd-ul").append(html);
                 if (+ data.totalCount <= config.limit || data.list.length < config.limit) {
@@ -78,6 +63,30 @@ define([
             }
         }).always(removeLoading);
     }
+
+    function buildHtml(item){
+        var positive = +item.transAmount >= 0 ? true : false,
+            transClass = positive ? "t_21b504" : "t_f64444",
+            prefix = positive && "+" || "";
+        if (item.bizType == "92") {
+            prefix = "";
+        }
+        return `<li class="plr20 ptb20 b_bd_b clearfix lh15rem">
+                    <div class="wp60 fl s_10">
+                        <p class="t_4d">${item.bizNote}</p>
+                        <p class="s_09 t_999 pt10">${base.formatDate(item.createDatetime, "yyyy-MM-dd hh:mm:ss")}</p>
+                    </div>
+                    <div class="wp40 fl tr ${transClass} s_10">
+                        <span class="inline_block va-m pt1em">${prefix + base.formatMoneyD(item.transAmount)}元</span>
+                        ${
+                            item.bizType == "-11" && item.fee
+                                ? `<br/><span class="inline_block va-m s_09">手续费${base.formatMoneyD(item.fee)}元</span>`
+                                : ""
+                        }
+                    </div>
+                </li>`;
+    }
+
     function addLoading() {
         $("#fd-ul").append('<li class="scroll-loadding"></li>')
     }
@@ -100,7 +109,6 @@ define([
             } else {
                 location.href = "toWithDraw.html"
             }
-
         });
         $(window).on("scroll", function() {
             if (canScrolling && !isEnd && ($(document).height() - $(window).height() - 10 <= $(document).scrollTop())) {

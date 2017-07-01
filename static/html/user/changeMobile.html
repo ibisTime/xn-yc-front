@@ -6,33 +6,32 @@
     <!--SCRIPT_PLACEHOLDER-->
 </head>
 <body class="bg_f5">
-<div class="">
-    <div class=" bg_fff login_input">
-        <div class="wp100 b_e6_b">
-            <div class="l_icon tc"><img class="va-m" src="../../images/m-icon.png"/></div>
-            <input placeholder="输入手机号码" type="tel" id="mobile"/>
-            <span class="warning">手机号不能为空</span>
-            <span class="warning">格式错误</span>
-            <span class="warning">手机号已注册过</span>
+    <form class="right-left-cont-info" id="cmForm">
+        <div class="right-left-cont-info-input-wrap">
+            <span class="right-left-cont-info-input-left">手机号：</span>
+            <div class="right-left-cont-info-input-right">
+                <input type="tel" name="newMobile" id="newMobile" placeholder="请输入手机号">
+            </div>
         </div>
-        <div class="wp100 b_e6_b">
-            <div class="l_icon tc"><img class="va-m" src="../../images/v-icon.png"/></div>
-            <input type="number" placeholder="短信验证码" class="pr100p" id="verification"/>
-            <span class="warning register_warning">验证码不能为空</span>
-            <span class="warning register_warning">验证码错误</span>
-            <span class="warning register_warning">请重新获取验证码</span>
-            <div class="mobile-verification"><a id="getVerification">获取验证码</a></div>
+        <div class="right-left-cont-info-input-wrap">
+            <span class="right-left-cont-info-input-left">验证码：</span>
+            <div class="right-left-cont-info-input-right">
+                <div class="pr110">
+                    <div class="p-r">
+                        <input type="number" name="smsCaptcha" id="smsCaptcha" placeholder="短信验证码">
+                    </div>
+                </div>
+                <input type="button" value="获取验证码" id="getVerification" class="captcha-btn">
+            </div>
         </div>
-    </div>
-    <div class="mt30 plr10">
-        <div class="wp100">
-            <input type="button" class="lh3_5rem wp100 bg_f64444 t_white b_radius4 s_13" value="设置" id="sbtn"/>
+        <div class="right-left-cont-btn-wrap">
+            <input type="button" id="sbtn" value="设置">
         </div>
-    </div>
-</div>
-<link rel="import" href="../footer.html?__inline">
-<script>
-    require(['app/controller/user/ChangeMobile']);
-</script>
+    </form>
+
+    <link rel="import" href="../footer.html?__inline">
+    <script>
+        require(['app/controller/user/ChangeMobile']);
+    </script>
 </body>
 </html>

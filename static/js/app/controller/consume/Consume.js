@@ -2,9 +2,10 @@ define([
     'app/controller/base',
     'app/module/loadImg',
     'app/module/foot',
+    'app/module/weixin',
     'app/interface/O2OCtr',
     'app/interface/GeneralCtr'
-], function(base, loadImg, Foot, O2OCtr, GeneralCtr) {
+], function(base, loadImg, Foot, weixin, O2OCtr, GeneralCtr) {
     var config = {
         "limit": 10,
         "start": 1
@@ -17,6 +18,12 @@ define([
     	businessPage();
     	getNavList();
         addListeners();
+        weixin.initShare({
+            title: document.title,
+            desc: document.title,
+            link: location.href,
+            imgUrl: base.getShareImg()
+        });
     }
 
     //导航
@@ -27,8 +34,10 @@ define([
                 base.hideLoading();
             	if(data.length){
 	                for (var i = 0, html = ""; i < data.length; i++) {
-	                    html += '<li><a href="javascript:void(0)" l_type="' + data[i].code + '"><div>'+
-	                        '<img src="'+base.getImg(data[i].pic)+'" alt=""></div><p>' + data[i].name + '</p></a></li>';
+	                    html += `<li><a href="javascript:void(0)" l_type="${data[i].code}">
+                                    <div><img src="${base.getImg(data[i].pic)}" /></div>
+                                    <p>${data[i].name}</p>
+                                </a></li>`;
 	                }
 	                $("#con-table").html(html);
 	            }
@@ -118,22 +127,7 @@ define([
                     }
                     var html = "";
                     for (var i = 0; i < curList.length; i++) {
-                        html += '<li class="ptb8 clearfix b_bd_b plr10" code="' + curList[i].code + '">' +
-                            '<a class="show p_r min-h100p" href="./detail.html?c=' + curList[i].code + '">' +
-                            '<div class="consume-center-wrap default-bg"><img class="center-img1 center-lazy" src="' + base.getImg(curList[i].advPic, 1) + '"/></div>' +
-                            '<div class="consume-right-wrap">' +
-                            '<p class="tl line-tow t_bold">' + curList[i].name + '</p>' +
-                            '<p class="tl pt4 line-tow s_10 t_80">' + curList[i].slogan + '</p>' ;
-
-                        if(curList[i].province == curList[i].city){
-                        	html +=  '<p class="tl pt4 line-tow s_10 t_80">'
-							+ curList[i].address + '</p></div>';
-                        }else{
-                        	html +=  '<p class="tl pt4 line-tow s_10 t_80">'
-                        	+ curList[i].address + '</p></div>';
-                        }
-
-                        html += '</a><div class="good-div t_ff0000"></div></li>';
+                        html += buildHtml(curList[i]);
                     }
                     $("#consume-ul").append(loadImg.loadImg(html));
                     config.start += 1;
@@ -143,7 +137,34 @@ define([
                 }
             }).always(removeLoading);
     }
-
+    function buildHtml(data) {
+        return `<li class="ptb8 clearfix b_bd_b plr10" code="${data.code}">
+                    <a class="show p_r min-h100p" href="./detail.html?c=${data.code}">
+                        <div class="consume-center-wrap default-bg">
+                            <img class="center-img1 center-lazy" src="${base.getImg(data.advPic, 1)}"/>
+                        </div>
+                        <div class="consume-right-wrap">
+                            <div>
+                                <div class="am-flexbox am-flexbox-justify-between">
+                                    <p class="tl t_norwrap t_bold am-flexbox-item ml0i">${data.name}</p>
+                                    ${
+                                        data.rate1
+                                            ? `<div class="t_ff0000 pl10 s_10">${data.rate1 * 10}折</div>`
+                                            : ""
+                                    }
+                                </div>
+                                <p class="tl pt4 line-tow s_10 t_80">${data.slogan}</p>
+                                ${
+                                    data.province == data.city
+                                        ? `<p class="tl t_norwrap s_10 t_80 pa_btm">${data.province} ${data.area} ${data.address}</p>`
+                                        : `<p class="tl t_norwrap s_10 t_80 pa_btm">${data.province} ${data.city} ${data.address}</p>`
+                                }
+                            </div>
+                        </div>
+                    </a>
+                    <div class="good-div t_ff0000"></div>
+                </li>`;
+    }
     function judgeError() {
         if (config.start == 1) {
             doError();

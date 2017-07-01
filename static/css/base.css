@@ -1317,7 +1317,6 @@ textarea {
 /*text  一行超出显示省略号*/
 
 .t_norwrap {
-    display: inline-block;
     width: 100%;
     white-space: nowrap;
     word-wrap: normal;
@@ -2732,7 +2731,7 @@ table th, table td {
     width: 100%;
     padding-left: 20px;
     padding-right: 44px;
-    line-height: 44px;
+    height: 34px;
     vertical-align: middle;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -2998,7 +2997,7 @@ table th, table td {
 }
 
 .consume-ml {
-    top: 16px;
+    top: 12px;
     width: 20px;
     position: absolute;
     left: 10px;
@@ -3012,7 +3011,7 @@ table th, table td {
     right: 10px;
     position: fixed;
     left: 10px;
-    top: 58px;
+    top: 48px;
     z-index: 999;
 }
 
@@ -3074,11 +3073,11 @@ table th, table td {
 .cons-list {
     position: fixed;
     z-index: 999;
-    top: 50px;
+    top: 40px;
 }
 
 .consume-detail-btn {
-    padding: 4px 16px;
+    padding: 4px 30px;
     border-radius: 4px;
     font-size: 1.1rem;
 }
@@ -3278,7 +3277,10 @@ table th, table td {
 
 .consume-right-wrap {
     padding-left: 112px;
-    padding-right: 36px;
+}
+.consume-right-wrap>div {
+    min-height: 100px;
+    position: relative;
 }
 
 .min-h80p {
@@ -3300,6 +3302,7 @@ table th, table td {
 
 .order-right-wrap {
     padding-left: 112px;
+    min-height: 100px;
 }
 
 .top4 {

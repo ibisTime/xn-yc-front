@@ -36,18 +36,7 @@ define([
                 if(data.list.length){
                     var html = "";
                     $.each(data.list, function(index, item){
-                        var positive = +item.transAmount >= 0 ? true : false,
-                            transClass = positive ? "t_21b504" : "t_f64444",
-                            prefix = positive && "+" || ""
-                        html += '<li class="plr20 ptb20 b_bd_b clearfix lh15rem">'+
-                                    '<div class="wp60 fl s_10">'+
-                                        '<p class="t_4d">' + item.bizNote + '</p>'+
-                                        '<p class="s_09 t_999 pt10">' + base.formatDate(item.createDatetime, "yyyy-MM-dd hh:mm:ss") + '</p>'+
-                                    '</div>'+
-                                    '<div class="wp40 fl tr ' + transClass + ' s_10">'+
-                                        '<span class="inline_block va-m pt1em">' + prefix + base.formatMoneyD(item.transAmount) + '</span>'+
-                                    '</div>'+
-                                '</li>';
+                        html += buildHtml(item);
                     });
                     $("#fd-ul").append(html);
                     config.start++;
@@ -65,6 +54,20 @@ define([
                     doError("暂无资金流水!");
                 }
             }).always(removeLoading);
+    }
+    function buildHtml(item){
+        var positive = +item.transAmount >= 0 ? true : false,
+            transClass = positive ? "t_21b504" : "t_f64444",
+            prefix = positive && "+" || "";
+        return `<li class="plr20 ptb20 b_bd_b clearfix lh15rem">
+                    <div class="wp60 fl s_10">
+                        <p class="t_4d">${item.bizNote}</p>
+                        <p class="s_09 t_999 pt10">${base.formatDate(item.createDatetime, "yyyy-MM-dd hh:mm:ss")}</p>
+                    </div>
+                    <div class="wp40 fl tr ${transClass} s_10">
+                        <span class="inline_block va-m pt1em">${prefix + base.formatMoneyD(item.transAmount)}</span>
+                    </div>
+                </li>`;
     }
     function doError(msg) {
         $("#fd-ul").html('<li class="bg_fff" style="text-align: center;line-height: 93px;">' + (msg || "暂时无法查到数据!") + "</li>");

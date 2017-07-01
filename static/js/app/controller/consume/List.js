@@ -1,9 +1,10 @@
 define([
     'app/controller/base',
     'app/module/foot',
+    'app/module/weixin',
     'app/interface/GeneralCtr',
     'app/interface/O2OCtr'
-], function(base, Foot, GeneralCtr, O2OCtr) {
+], function(base, Foot, weixin, GeneralCtr, O2OCtr) {
     var type = base.getUrlParam("t"),
         conTypes = {},
         config = {
@@ -22,6 +23,12 @@ define([
         getNavList();
         businessPage().then(base.hideLoading);
         addListeners();
+        weixin.initShare({
+            title: document.title,
+            desc: document.title,
+            link: location.href,
+            imgUrl: base.getShareImg()
+        });
     }
     //添加类型列表
     function getNavList() {
@@ -135,7 +142,7 @@ define([
                 curList = data.list;
             if (curList.length) {
                 curList.forEach(function(item) {
-                    html += '<li><a class="show" href="./detail.html?c=' + item.code + '">' + item.name + '</a></li>';
+                    html += `<li><a class="show" href="./detail.html?c=${item.code}">${item.name}</a></li>`;
                 });
             } else {
                 html = '<li class="tc">未搜索到商家</li>';
@@ -155,14 +162,7 @@ define([
                 if (curList.length) {
                     var html = "";
                     for (var i = 0; i < curList.length; i++) {
-                        html += '<li class="ptb8 clearfix b_bd_b plr10" code="' + curList[i].code + '">' + '<a class="show p_r min-h100p" href="./detail.html?c=' + curList[i].code + '">' + '<div class="consume-center-wrap default-bg"><img class="center-img1 center-lazy hp100" src="' + base.getImg(curList[i].advPic, 1) + '"/></div>' + '<div class="consume-right-wrap">' + '<p class="tl line-tow t_bold">' + curList[i].name + '</p>' + '<p class="tl pt4 line-tow s_10 t_80">' + curList[i].slogan + '</p>';
-
-                        if (curList[i].province == curList[i].city) {
-                            html += '<p class="tl pt4 line-tow s_10 t_80">' + curList[i].province + " " + curList[i].area + " " + curList[i].address + '</p></div>';
-                        } else {
-                            html += '<p class="tl pt4 line-tow s_10 t_80">' + curList[i].province + " " + curList[i].city + " " + curList[i].address + '</p></div>';
-                        }
-                        html += '</a><div class="good-div t_ff0000"></div></li>';
+                        html += buildHtml(curList[i]);
                     }
                     $("#consume-ul").append(html);
                     canScrolling = true;
@@ -171,6 +171,27 @@ define([
                     judgeError();
                 }
             }, judgeError).always(removeLoading);
+    }
+    function buildHtml(data){
+        return `<li class="ptb8 clearfix b_bd_b plr10" code="${data.code}">
+                    <a class="show p_r min-h100p" href="./detail.html?c=${data.code}">
+                        <div class="consume-center-wrap default-bg">
+                            <img class="center-img1 center-lazy hp100" src="${base.getImg(data.advPic, 1)}"/>
+                        </div>
+                        <div class="consume-right-wrap">
+                            <div>
+                                <p class="tl t_norwrap t_bold">${data.name}</p>
+                                <p class="tl pt4 line-tow s_10 t_80">${data.slogan}</p>
+                                ${
+                                    data.province == data.city
+                                        ? `<p class="tl pt4 t_norwrap s_10 t_80 pa_btm">${data.province} ${data.area} ${data.address}</p>`
+                                        : `<p class="tl pt4 t_norwrap s_10 t_80 pa_btm">${data.province} ${data.city} ${data.address}</p>`
+                                }
+                            </div>
+                        </div>
+                    </a>
+                    <div class="good-div t_ff0000"></div>
+                </li>`;
     }
     //处理异常情况
     function judgeError() {
