@@ -149,7 +149,7 @@ define([
                                     <p class="tl t_norwrap t_bold am-flexbox-item ml0i">${data.name}</p>
                                     ${
                                         data.rate1
-                                            ? `<div class="t_ff0000 pl10 s_10">${data.rate1 * 10}折</div>`
+                                            ? `<div class="t_ff0000 pl10 s_13">${data.rate1 * 10}折</div>`
                                             : ""
                                     }
                                 </div>
@@ -162,7 +162,6 @@ define([
                             </div>
                         </div>
                     </a>
-                    <div class="good-div t_ff0000"></div>
                 </li>`;
     }
     function judgeError() {

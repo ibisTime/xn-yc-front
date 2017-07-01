@@ -56,7 +56,7 @@ define([
                                 <img class="center-img1" src="${base.getImg(data.product.advPic)}"/>
                             </div>
                             <div class="order-right-wrap clearfix">
-                                <div class="fl wp60"><p class="tl line-tow">${data.product.name}</p></div>
+                                <div class="fl wp60"><p class="tl line-tow">${productSpecs.name}</p></div>
                                 <div class="fl wp40 tr s_11">
                                     <p class="item_totalP">
                                         <span>${base.formatMoneyD(productSpecs.price2)}橙券</span><br/>或

@@ -77,7 +77,7 @@ define([
 
         return `<li class="ptb8 clearfix b_bd_b plr10">
                     <a class="show p_r min-h100p" href="../operator/buy.html?code=${val.code}">
-                        <div class="order-img-wrap tc"><img class="center-img1" src="${base.getImg(val.advPic, 1)}"/></div>
+                        <div class="order-img-wrap tc default-bg"><img class="center-img1" src="${base.getImg(val.advPic, 1)}"/></div>
                         <div class="order-right-wrap am-flexbox am-flexbox-align-top am-flexbox-dir-column am-flexbox-justify-between">
                             <div class="am-flexbox am-flexbox-align-top wp100">
                                 <p class="t_323232 s_12 line-tow am-flexbox-item ml0i">${val.name}</p>
@@ -89,7 +89,11 @@ define([
                             </p>
                             ${
                                 val.category == PSJH || val.category == GSRG
-                                    ? `<p class="s_10">${val.strain} | ${val.logisticsDate}</p>`
+                                    ? `<p class="s_10">${val.strain} | ${val.logisticsDate} | ${
+                                        val.category == PSJH
+                                            ? `共${val.logisticsSum}次`
+                                            : `${val.logisticsSum}年`
+                                    }</p>`
                                     : `<p class="s_10" style="text-decoration: line-through;">市场参考价：<span>${originalPrice}</span></p>`
                             }
                         </div>

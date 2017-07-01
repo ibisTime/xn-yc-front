@@ -42,7 +42,6 @@ define([
                 userId: base.getUserId()
             });
         },
-        //
         /*
          * 取现
          * config: {accountNumber,payCardNo,remainAmount,amount,applyUser,applyNote,tradePwd,payCardInfo}

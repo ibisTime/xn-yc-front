@@ -71,20 +71,7 @@ define([
             // 果树认购
             if(rspData.category == GSRG){
                 base.showLoading("下单中...");
-                MallCtr.submitOrder({
-                    productSpecsCode,
-                    quantity: 1,
-                    toUser: SYSTEM_USERID,
-                    pojo: {
-                        applyUser: base.getUserId(),
-                        companyCode: SYSTEM_CODE,
-        	            systemCode: SYSTEM_CODE
-                    }
-                }).then((data) => {
-                    base.hideLoading();
-                    var code = data.code || data;
-                    location.href = '../pay/pay_order.html?code=' + code;
-                });
+                submitGSRG();
             }else{
                 location.href = `./submit_order.html?code=${code}&q=${quantity || 1}&spec=${productSpecsCode}`;
             }
@@ -111,6 +98,9 @@ define([
         $.each(pics, function(i, val) {
             html += '<div class="swiper-slide tc"><img src="' + base.getImg(val, 1) + '"></div>';
         });
+        if(pics.length <= 1){
+            $(".swiper-pagination").addClass("hidden");
+        }
         $("#btlImgs").html(html);
         new Swiper('.swiper-container', {
             'direction': 'horizontal',
@@ -128,7 +118,11 @@ define([
 
         // 配送计划 或 果树认购
         if(msl.category == PSJH || msl.category == GSRG){
-            $("#btr-desc").removeClass("hidden").html(msl.strain + " | " + msl.logisticsDate);
+            $("#btr-desc").removeClass("hidden").html(`${msl.strain} | ${msl.logisticsDate} | ${
+                msl.category == PSJH
+                    ? `共${msl.logisticsSum}次`
+                    : `${msl.logisticsSum}年`
+            }`);
         }
         html = "";
         productSpecsList.forEach(function(productSpecs){
@@ -137,5 +131,22 @@ define([
         });
         $("#chose-img").html(`<img src="${base.getImg(msl.advPic, 1)}"/>`)
         $("#productSpecs").html(html);
+    }
+
+    function submitGSRG() {
+        MallCtr.submitOrder({
+            productSpecsCode,
+            quantity,
+            toUser: SYSTEM_USERID,
+            pojo: {
+                applyUser: base.getUserId(),
+                companyCode: SYSTEM_CODE,
+                systemCode: SYSTEM_CODE
+            }
+        }).then((data) => {
+            base.hideLoading();
+            var code = data.code || data;
+            location.href = '../pay/pay_order.html?code=' + code;
+        });
     }
 });

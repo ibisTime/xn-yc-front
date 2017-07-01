@@ -3104,7 +3104,7 @@ table th, table td {
 .clist_div {
     z-index: 120;
     position: absolute;
-    top: 112px;
+    top: 102px;
     font-size: 1rem;
 }
 

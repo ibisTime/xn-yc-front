@@ -65,9 +65,11 @@ define([
                         </div>
                         <div class="d-icont-infos am-flexbox-item">
                             <div class="am-flexbox am-flexbox-dir-column am-flexbox-justify-between am-flexbox-align-top">
-                                <div class="d-infos-title line-tow">${cl.productName}</div>
+                                <div class="d-infos-title line-tow">${cl.productSpecs.name}</div>
                                 <div class="d-infos-price">${base.formatMoneyD(cl.amount2)}橙券/${base.formatMoneyD(cl.amount1)}元</div>
-                                <div class="d-infos-desc">${cl.product.strain} | ${cl.product.logisticsDate}</div>
+                                <div class="d-infos-desc">
+                                    ${cl.product.strain} | ${cl.product.logisticsDate} | 剩余${cl.logisticsSum - cl.logisticsRemain }/${cl.logisticsSum}年
+                                </div>
                             </div>
                         </div>
                         <div class="d-icont-status">${orderStatus[cl.status]}</div>

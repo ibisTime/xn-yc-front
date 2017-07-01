@@ -90,7 +90,11 @@ define([
                             </p>
                             ${
                                 d.category == PSJH || d.category == GSRG
-                                    ? `<p>${d.strain} | ${d.logisticsDate}</p>`
+                                    ? `<p class="s_10">${d.strain} | ${d.logisticsDate} | ${
+                                        d.category == PSJH
+                                            ? `共${d.logisticsSum}次`
+                                            : `${d.logisticsSum}年`
+                                    }</p>`
                                     : `<p class="s_10"  style="text-decoration: line-through;">市场参考价：<span>${originalPrice}</span></p>`
                             }
                         </div>

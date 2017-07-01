@@ -180,7 +180,14 @@ define([
                         </div>
                         <div class="consume-right-wrap">
                             <div>
-                                <p class="tl t_norwrap t_bold">${data.name}</p>
+                                <div class="am-flexbox am-flexbox-justify-between">
+                                    <p class="tl t_norwrap t_bold am-flexbox-item ml0i">${data.name}</p>
+                                    ${
+                                        data.rate1
+                                            ? `<div class="t_ff0000 pl10 s_10">${data.rate1 * 10}折</div>`
+                                            : ""
+                                    }
+                                </div>
                                 <p class="tl pt4 line-tow s_10 t_80">${data.slogan}</p>
                                 ${
                                     data.province == data.city

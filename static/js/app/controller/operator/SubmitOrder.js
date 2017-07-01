@@ -101,7 +101,7 @@ define([
                             </div>
                             <div class="order-right-wrap clearfix">
                                 <div class="fl wp60">
-                                    <p class="tl line-tow">${data.name}</p>
+                                    <p class="tl line-tow">${productSpec.name}</p>
                                     <p class="tl pt4 line-tow">${data.slogan}</p>
                                 </div>
                                 <div class="fl wp40 tr s_10">

@@ -92,7 +92,7 @@ define([
                             </div>
                             <div class="order-right-wrap clearfix">
                                 <div class="fl wp60 pt12">
-                                    <p class="tl line-tow">${invoice.product.name}</p>
+                                    <p class="tl line-tow s_12">${invoice.product.name}</p>
                                 </div>
                                 <div class="fl wp40 tr pt12">
                                     <p class="item_totalP">
