@@ -373,7 +373,7 @@
                     margin-right: 12px;
                     position: relative;
 
-                    p {
+                    .img-show {
                         position: absolute;
                         width: 114px;
                         height: 114px;
@@ -399,7 +399,6 @@
                         overflow: hidden;
 
                         img {
-                            width: 100%;
                             border-radius: 2px;
                         }
                     }
@@ -469,9 +468,7 @@
 
                 li {
                     display: inline-block;
-                    // height: 0.8rem;
                     line-height: 30px;
-                    // text-align: center;
                     vertical-align: middle;
                     background: #d8d8d8;
                     border-radius: 6px;

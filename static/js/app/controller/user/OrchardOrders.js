@@ -68,7 +68,7 @@ define([
                                 <div class="d-infos-title line-tow">${cl.productSpecs.name}</div>
                                 <div class="d-infos-price">${base.formatMoneyD(cl.amount2)}橙券/${base.formatMoneyD(cl.amount1)}元</div>
                                 <div class="d-infos-desc">
-                                    ${cl.product.strain} | ${cl.product.logisticsDate} | 剩余${cl.logisticsSum - cl.logisticsRemain }/${cl.logisticsSum}年
+                                    ${cl.product.strain} | ${cl.product.logisticsDate} | ${cl.logisticsSum}年
                                 </div>
                             </div>
                         </div>

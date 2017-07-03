@@ -30,10 +30,6 @@
     <div class="default-home"><a href="/"></a></div>
     <div style="height: 90px;"></div>
     <footer class="fixft bg_fff b_bd_t s_14  tc">
-        <!-- <div class="fl wp70 t_red bg_fff" id="totalNum">
-            <p style="height: 55px;line-height: 55px" class="CB tl pl15"></p>
-        </div>
-        <a class="fl wp30 t_white bg_ff0000 lh3_1em" id="buyBtn">立即购买</a> -->
         <a class="buy_btn wp100" id="buyBtn">立即购买</a>
     </footer>
     <div class="pop-btm hide" id="popCont">
@@ -43,11 +39,15 @@
                 <div class="ctrl-ui-sku">
                     <div class="sku-pro">
                         <div class="sku-img">
-                            <p id="chose-img"></p>
+                            <div class="img-show" id="chose-img"></div>
                         </div>
                         <div class="sku-pro-info">
                             <div>
                                 <p class="t_f64444" id="chose-price"></p>
+                                <p class="sku-txt">
+                                    <span class="c-sku" id="">库存：</span>
+                                    <span class="c-sku" id="chose-quantity"></span>
+                                </p>
                                 <p class="sku-txt">
                                     <span class="c-sku" id="chose-name"></span>
                                     <span class="unc-sku" id="chose-tip">请选择: 商品分类</span>

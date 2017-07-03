@@ -148,7 +148,7 @@ define([
                                 <div class="am-flexbox am-flexbox-justify-between">
                                     <p class="tl t_norwrap t_bold am-flexbox-item ml0i">${data.name}</p>
                                     ${
-                                        data.rate1
+                                        data.rate1 && data.rate1 != 1
                                             ? `<div class="t_ff0000 pl10 s_13">${data.rate1 * 10}折</div>`
                                             : ""
                                     }

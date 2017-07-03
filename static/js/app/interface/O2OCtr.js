@@ -9,8 +9,10 @@ define([
          */
         getPageBusiness(config, refresh) {
             return Ajax.get("808217", {
-                "status": "2",
-                "userId": base.getUserId(),
+                status: "2",
+                userId: base.getUserId(),
+                orderColumn: "ui_order",
+                orderDir: "asc",
                 ...config
             }, refresh);
         },

@@ -3,8 +3,9 @@ define([
     'swiper',
     'app/module/weixin',
     'app/module/addSub',
+    'app/module/loadImg',
     'app/interface/MallCtr'
-], function(base, Swiper, weixin, addSub, MallCtr) {
+], function(base, Swiper, weixin, addSub, loadImg, MallCtr) {
     var rspData,
         code = base.getUrlParam("code"),
         productSpecsCode,
@@ -46,7 +47,8 @@ define([
         (function(){
             var _tip = $("#chose-tip"),
                 _price = $("#chose-price"),
-                _name = $("#chose-name");
+                _name = $("#chose-name"),
+                _quantity = $("#chose-quantity");
             // 选择商品类别
             _popCont.find("ul").on("click", "li", function(){
                 var self = $(this);
@@ -60,6 +62,7 @@ define([
                 var price2 = base.formatMoneyD(productSpecs.price2) + "橙券",
                     price1 = base.formatMoneyD(productSpecs.price1) + "元";
                 _price.text(price2 + "/" + price1);
+                _quantity.text(productSpecs.quantity);
             });
         })();
         // 购买
@@ -129,8 +132,12 @@ define([
             code2productSpecs[productSpecs.code] = productSpecs;
             html += `<li class="normal" code="${productSpecs.code}">${productSpecs.name}</li>`;
         });
-        $("#chose-img").html(`<img src="${base.getImg(msl.advPic, 1)}"/>`)
-        $("#productSpecs").html(html);
+        $("#chose-img").html(loadImg.loadImg(`<div class="wp100 hp100 default-bg">
+                <img class="center-img1" src="${base.getImg(msl.advPic, 1)}"/>
+            </div>`));
+        var _productSpecs = $("#productSpecs");
+         _productSpecs.html(html);
+         productSpecsList.length && _productSpecs.find("li").first().click();
     }
 
     function submitGSRG() {

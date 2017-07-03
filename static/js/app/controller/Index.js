@@ -77,7 +77,7 @@ define([
                     data.forEach(function(item){
                         html += `<div class="swiper-slide"><img data-url="${item.url}" class="wp100 hp100" src="${base.getImg(item.pic, 1)}"></div>`;
                     });
-                    if(item.length <= 1){
+                    if(data.length <= 1){
                         $(".swiper-pagination").addClass("hidden");
                     }
                     $("#top-swiper").html(html);

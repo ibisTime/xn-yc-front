@@ -69,7 +69,7 @@ define([
                                 <span class="pr6 va-m inline_block">${data.bookMobile}</span>
                             </a>`);
                 $("#description").html(data.description);
-                rate1 && $("#discount").html(`通过我们，享${rate1 * 10}折`)
+                rate1 && rate1 != 1 && $("#discount").html(`通过我们，享${rate1 * 10}折`)
                 rate2 = data.rate2;
             }, doError);
     }
