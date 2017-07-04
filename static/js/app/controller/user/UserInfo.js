@@ -9,6 +9,10 @@ define([
     init();
 
     function init() {
+        // $("#tcdl").click(function(){
+        //     base.clearSessionUser();
+        //     location.reload(true);
+        // });
         Foot.addFoot(3);
         base.showLoading("加载中...", 1);
         $.when(

@@ -38,8 +38,9 @@ define([
             // qq空间分享
             wx.onMenuShareQZone(config);
         });
-        wx.error(() => {
-            alert("微信sdk初始化失败");
+        wx.error((error) => {
+            // alert(JSON.stringify(error))
+            // alert("微信sdk初始化失败");
         })
     }
     // 微信支付

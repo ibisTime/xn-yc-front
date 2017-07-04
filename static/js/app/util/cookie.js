@@ -25,7 +25,7 @@ define([], function() {
 			var cval = cookieUtil.get(name);
 			if (cval != null)
 				document.cookie = name + "=" + cval + ";expires="
-						+ exp.toGMTString();
+						+ exp.toGMTString() + ";path=/;";
 		}
 	};
 	return cookieUtil;

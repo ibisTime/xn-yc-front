@@ -55,7 +55,7 @@ define([
                 self.removeClass("normal").addClass("sel")
                     .siblings(".sel").removeClass("sel").addClass("normal");
                 _tip.empty();
-                _name.text("已选：" + self.text());
+                _name.text("已选：" + self.attr("data-name"));
                 productSpecsCode = self.attr("code");
 
                 var productSpecs = code2productSpecs[productSpecsCode];
@@ -126,11 +126,16 @@ define([
                     ? `共${msl.logisticsSum}次`
                     : `${msl.logisticsSum}年`
             }`);
+            if(msl.category == PSJH){
+                $("#sum").removeClass("hidden");
+                $("#subCount,#btnInput,#addCount").addClass("hidden");
+            }
         }
         html = "";
         productSpecsList.forEach(function(productSpecs){
             code2productSpecs[productSpecs.code] = productSpecs;
-            html += `<li class="normal" code="${productSpecs.code}">${productSpecs.name}</li>`;
+            html += `<li class="normal" data-name="${productSpecs.name}" code="${productSpecs.code}">
+                ${productSpecs.name} &nbsp;重量：${productSpecs.weight}kg &nbsp;发货地：${productSpecs.province}</li>`;
         });
         $("#chose-img").html(loadImg.loadImg(`<div class="wp100 hp100 default-bg">
                 <img class="center-img1" src="${base.getImg(msl.advPic, 1)}"/>

@@ -48,7 +48,7 @@ define([
     }
     // 生成商品html
     function buildHtml(data) {
-        var productSpecs = data.productSpecs;
+        var productSpecs = data.product;
         return `<ul>
                     <li class="ptb8 clearfix b_bd_b plr10" modelCode="${productSpecs.productCode}">
                         <a class="show p_r min-h100p" href="../operator/buy.html?code=${productSpecs.productCode}">
@@ -157,7 +157,7 @@ define([
             }
         }, function(error, d){
             if(d){
-                if(error == "橙币不足"){
+                if(error == "橙券不足"){
                     d.close().remove();
                     base.confirm("橙券余额不足，是否前往购买？", "否", "是").then(function() {
                         location.href = "../pay/buyCgM.html";

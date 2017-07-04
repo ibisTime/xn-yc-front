@@ -96,8 +96,8 @@ define([
                                 </div>
                                 <div class="fl wp40 tr pt12">
                                     <p class="item_totalP">
-                                        <span>${base.formatMoneyD(invoice.productSpecs.price2)}橙券</span>
-                                        <br/>或<span class="item_totalP">${base.formatMoneyD(invoice.productSpecs.price1)}元</span>
+                                        <span>${base.formatMoneyD(invoice.product.price2)}橙券</span>
+                                        <br/>或<span class="item_totalP">${base.formatMoneyD(invoice.product.price1)}元</span>
                                     </p>
                                     <p class="t_80">×<span>${invoice.quantity}</span></p>
                                     <p>&nbsp;</p>

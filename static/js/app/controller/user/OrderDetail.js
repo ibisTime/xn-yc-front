@@ -72,7 +72,7 @@ define([
     }
 
     function buildHtml(data) {
-        var productSpecs = data.productSpecs;
+        var productSpecs = data.product;
         return `<ul>
                     <li class="ptb8 clearfix b_bd_b plr10" modelCode="${productSpecs.productCode}">
                         <a class="show p_r min-h100p" href="../operator/buy.html?code=${productSpecs.productCode}">
