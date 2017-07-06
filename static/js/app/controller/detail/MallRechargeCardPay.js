@@ -53,12 +53,12 @@ define([
             .then(function() {
                 base.hideLoading();
                 $("#od-mask, #od-tipbox").addClass("hidden");
-                location.href = "./pay_success.html";
+                location.href = "./pay_success.htm";
             }, function(error, d){
                 if(d && error == "账户余额不足"){
                     d.close().remove();
                     base.confirm("账户余额不足，是否前往充值？", "否", "是").then(function() {
-                        location.href = "../pay/buyCgM.html";
+                        location.href = "../pay/buyCgM.htm";
                     }, function() {});
                 }
             });

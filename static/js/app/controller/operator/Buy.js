@@ -76,7 +76,7 @@ define([
                 base.showLoading("下单中...");
                 submitGSRG();
             }else{
-                location.href = `./submit_order.html?code=${code}&q=${quantity || 1}&spec=${productSpecsCode}`;
+                location.href = `./submit_order.htm?code=${code}&q=${quantity || 1}&spec=${productSpecsCode}`;
             }
         });
 
@@ -112,8 +112,8 @@ define([
 
         $("#btr-name").text(msl.name);
         $("#btr-slogan").text(msl.slogan);
-        var price2 = base.formatMoneyD(msl.price2) + "橙券",
-            price1 = base.formatMoneyD(msl.price1) + "元";
+        var price2 = base.formatMoneyD(msl.productSpecsList[0].price2) + "橙券",
+            price1 = base.formatMoneyD(msl.productSpecsList[0].price1) + "元";
         $("#discountPrice").text(price2);
         $("#cnyPrice").text("/" + price1);
         $("#chose-price").text(price2 + "/" + price1);
@@ -127,15 +127,16 @@ define([
                     : `${msl.logisticsSum}年`
             }`);
             if(msl.category == PSJH){
-                $("#sum").removeClass("hidden");
-                $("#subCount,#btnInput,#addCount").addClass("hidden");
+                $("#quantity-info").addClass("hidden");
             }
         }
         html = "";
         productSpecsList.forEach(function(productSpecs){
             code2productSpecs[productSpecs.code] = productSpecs;
             html += `<li class="normal" data-name="${productSpecs.name}" code="${productSpecs.code}">
-                ${productSpecs.name} &nbsp;重量：${productSpecs.weight}kg &nbsp;发货地：${productSpecs.province}</li>`;
+                ${productSpecs.name} ${
+                    msl.category != GSRG ? `&nbsp;重量：${productSpecs.weight}kg&nbsp;发货地：${productSpecs.province}` : ""
+                }</li>`;
         });
         $("#chose-img").html(loadImg.loadImg(`<div class="wp100 hp100 default-bg">
                 <img class="center-img1" src="${base.getImg(msl.advPic, 1)}"/>
@@ -158,7 +159,7 @@ define([
         }).then((data) => {
             base.hideLoading();
             var code = data.code || data;
-            location.href = '../pay/pay_order.html?code=' + code;
+            location.href = '../pay/pay_order.htm?code=' + code;
         });
     }
 });

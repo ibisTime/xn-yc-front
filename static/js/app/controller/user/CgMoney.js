@@ -74,7 +74,7 @@ define([
     }
     function addListener(){
         $("#buyCg").on("click",function(){
-            location.href="../pay/buyCgM.html"
+            location.href="../pay/buyCgM.htm"
         })
         $(window).on("scroll", function() {
             if (canScrolling && !isEnd && ($(document).height() - $(window).height() - 10 <= $(document).scrollTop())) {
@@ -90,7 +90,7 @@ define([
                 AccountCtr.rechargeByCard(res.resultStr.split('code=')[1])
                     .then(function() {
                         base.hideLoading();
-                        location.href = "./get_success.html";
+                        location.href = "./get_success.htm";
                     });
             }, function(msg) {
                 alert(JSON.stringify(msg));

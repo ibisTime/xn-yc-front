@@ -42,7 +42,7 @@ define([
                 });
                 //支付订单
                 $("#sbtn").on("click", function() {
-                    location.href = '../detail/recharge_cardPay.html?code=' + code + "&a=" + price + "&rate=" + rate;
+                    location.href = '../detail/recharge_cardPay.htm?code=' + code + "&a=" + price + "&rate=" + rate;
                 });
                 addListener();
             }
@@ -68,7 +68,7 @@ define([
         }
         return `<ul>
                     <li class="ptb8 clearfix b_bd_b" modelCode="${data.product.code}">
-                        <a class="show p_r min-h100p" href="../detail/recharge_cardDetail.html?code=${data.product.code}">
+                        <a class="show p_r min-h100p" href="../detail/recharge_cardDetail.htm?code=${data.product.code}">
                             <div class="order-img-wrap ml10 tc default-bg mr10">
                                 <img class="center-img1" src="${base.getImg(data.product.advPic)}"/>
                             </div>

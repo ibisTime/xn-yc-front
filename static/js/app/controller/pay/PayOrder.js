@@ -28,7 +28,7 @@ define([
         return  MallCtr.getOrder(code).then(function(data) {
             //如果不是待支付订单，则直接跳到个人中心页面
             if (data.status !== "1") {
-                location.href = "../user/user_info.html";
+                location.href = "../user/user_info.htm";
             }
             //订单相关商品信息
             var html = buildHtml(data);
@@ -51,7 +51,7 @@ define([
         var productSpecs = data.product;
         return `<ul>
                     <li class="ptb8 clearfix b_bd_b plr10" modelCode="${productSpecs.productCode}">
-                        <a class="show p_r min-h100p" href="../operator/buy.html?code=${productSpecs.productCode}">
+                        <a class="show p_r min-h100p" href="../operator/buy.htm?code=${productSpecs.productCode}">
                             <div class="order-img-wrap tc default-bg">
                                 <img class="center-img1" src="${base.getImg(data.product.advPic)}"/>
                             </div>
@@ -150,7 +150,7 @@ define([
                 base.hideLoading();
                 base.showMsg("支付成功");
                 setTimeout(function() {
-                    location.href = "../operator/pay_success.html";
+                    location.href = "../operator/pay_success.htm";
                 }, 1000);
             } else {
                 wxPay(data);
@@ -160,12 +160,12 @@ define([
                 if(error == "橙券不足"){
                     d.close().remove();
                     base.confirm("橙券余额不足，是否前往购买？", "否", "是").then(function() {
-                        location.href = "../pay/buyCgM.html";
+                        location.href = "../pay/buyCgM.htm";
                     }, function() {})
                 }else if (error == "人民币账户余额不足") {
                     d.close().remove();
                     base.confirm("人民币账户余额不足，是否前往购买？", "否", "是").then(function() {
-                        location.href = "../pay/cny_recharge.html";
+                        location.href = "../pay/cny_recharge.htm";
                     }, function() {});
                 }
 
@@ -177,7 +177,7 @@ define([
             weixin.initPay(data, () => {
                 base.showMsg("支付成功");
                 setTimeout(function(){
-                    location.href = "../consume/detail.html?c=" + code;
+                    location.href = "../consume/detail.htm?c=" + code;
                 }, 1000);
             }, () => {
                 base.showMsg("支付失败");

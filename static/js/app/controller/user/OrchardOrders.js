@@ -75,7 +75,7 @@ define([
                         <div class="d-icont-status">${orderStatus[cl.status]}</div>
                     </div>
                     ${cl.status == "1" ? `<div class="d-item-bottom clearfix">
-                        <a href="../pay/pay_order.html?code=${cl.code}" class="d-item-button">立即支付</a>
+                        <a href="../pay/pay_order.htm?code=${cl.code}" class="d-item-button">立即支付</a>
                     </div>` : ''}
                 </div>`;
     }

@@ -141,12 +141,12 @@ define([
             var rUrl = Base.getUrlParam("return");
             if (isLoginBack) {
                 var returnUrl = sessionStorage.getItem("l-return");
-                location.href = returnUrl || url || "../user/user_info.html";
+                location.href = returnUrl || url || "../user/user_info.htm";
             } else {
                 if (rUrl) {
                     location.href = rUrl;
                 } else {
-                    location.href = url || "../index.html";
+                    location.href = url || "../index.htm";
                 }
             }
 
@@ -159,7 +159,7 @@ define([
         },
         goLogin: function() {
             sessionStorage.setItem("l-return", location.pathname + location.search);
-            location.href = "../user/redirect.html";
+            location.href = "../user/redirect.htm";
         },
         throttle: function(method, context, t) {
             var tt = t || 100;

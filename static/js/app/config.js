@@ -6,9 +6,9 @@ var PIC_DETAIL = '?imageMogr2/auto-orient/thumbnail/!750x480r';
 // 当季水果
 var DJSG = 'FL201706252051242143422';
 // 配送计划
-var PSJH = 'FL2017062716471159133341';
+var PSJH = 'FL20170627100000001';
 // 果树认购
-var GSRG = 'FL2017062717580920664616';
+var GSRG = 'FL20170627100000002';
 // 北大荒
 var BDH = 'FL201706141015520756888';
 // 热门活动
@@ -16,7 +16,7 @@ var RMHD = 'CP2017062914400134550585';
 
 (function() {
     // 判断是否登录
-    if (!/\/redirect\.html/.test(location.href)) {
+    if (!/\/redirect\.htm/.test(location.href)) {
         var arr,
             reg = new RegExp("(^| )userId=([^;]*)(;|$)"),
             userId,
@@ -31,7 +31,7 @@ var RMHD = 'CP2017062914400134550585';
                 userReferee = decodeURIComponent(r[2]);
             sessionStorage.setItem("userReferee", userReferee);
             sessionStorage.setItem("l-return", location.pathname + location.search);
-            location.replace("../user/redirect.html");
+            location.replace("../user/redirect.htm");
         }
     }
 })()

@@ -47,7 +47,7 @@ define([
             e.stopPropagation();
             e.preventDefault();
             var me = $(this);
-            location.href = "../pay/pay_order.html?code=" + me.closest("li[code]").attr("code");
+            location.href = "../pay/pay_order.htm?code=" + me.closest("li[code]").attr("code");
         });
     }
 
@@ -82,7 +82,7 @@ define([
     function buildHtml(invoice){
         var code = invoice.code;
         return `<li class="clearfix b_bd_b b_bd_t bg_fff mt10" code="${code}">
-                    <a class="show plr10" href="./order_detail.html?code=${code}" class="show">
+                    <a class="show plr10" href="./order_detail.htm?code=${code}" class="show">
                         <div class="wp100 b_bd_b clearfix ptb10">
                             <div class="fl">订单号：<span>${code}</span></div>
                         </div>

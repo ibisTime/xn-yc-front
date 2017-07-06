@@ -24,7 +24,7 @@ define([
             var html = "";
             data.list.forEach(function(v, i) {
                 html += `<li class="ptb8 clearfix b_bd_b plr10">
-                    <a class="show p_r min-h100p" href="./recharge_cardDetail.html?code=${v.code}">
+                    <a class="show p_r min-h100p" href="./recharge_cardDetail.htm?code=${v.code}">
                         <div class="order-img-wrap tc"><img class="center-img1 wp100" src="${base.getImg(v.advPic, 1)}"></div>
                         <div class="order-right-wrap clearfix pt15">
                             <p class="t_323232 s_14 line-tow">${v.name}</p>

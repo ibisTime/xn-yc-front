@@ -142,7 +142,7 @@ define([
                 curList = data.list;
             if (curList.length) {
                 curList.forEach(function(item) {
-                    html += `<li><a class="show" href="./detail.html?c=${item.code}">${item.name}</a></li>`;
+                    html += `<li><a class="show" href="./detail.htm?c=${item.code}">${item.name}</a></li>`;
                 });
             } else {
                 html = '<li class="tc">未搜索到商家</li>';
@@ -174,7 +174,7 @@ define([
     }
     function buildHtml(data){
         return `<li class="ptb8 clearfix b_bd_b plr10" code="${data.code}">
-                    <a class="show p_r min-h100p" href="./detail.html?c=${data.code}">
+                    <a class="show p_r min-h100p" href="./detail.htm?c=${data.code}">
                         <div class="consume-center-wrap default-bg">
                             <img class="center-img1 center-lazy hp100" src="${base.getImg(data.advPic, 1)}"/>
                         </div>
@@ -183,7 +183,7 @@ define([
                                 <div class="am-flexbox am-flexbox-justify-between">
                                     <p class="tl t_norwrap t_bold am-flexbox-item ml0i">${data.name}</p>
                                     ${
-                                        data.rate1
+                                        data.rate1 && data.rate1 != 1
                                             ? `<div class="t_ff0000 pl10 s_10">${data.rate1 * 10}折</div>`
                                             : ""
                                     }

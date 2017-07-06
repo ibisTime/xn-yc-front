@@ -65,7 +65,7 @@ define([
                 if (res.errorCode == "4") {
                     clearSessionUser();
                     sessionStorage.setItem("l-return", location.pathname + location.search);
-                    location.replace("../user/redirect.html");
+                    location.replace("../user/redirect.htm");
                     return $.Deferred().reject();
                 }
                 if(res.errorCode != "0"){

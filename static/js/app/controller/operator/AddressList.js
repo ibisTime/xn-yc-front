@@ -55,9 +55,9 @@ define([
         $("#addressDiv").on("click", "a", function() {
             var thisCode = $(this).attr("code");
             if (code) {
-                location.href = "./add_address.html?eCode=" + thisCode + "&return=1";
+                location.href = "./add_address.htm?eCode=" + thisCode + "&return=1";
             } else {
-                location.href = "./add_address.html?eCode=" + thisCode;
+                location.href = "./add_address.htm?eCode=" + thisCode;
             }
         });
 
@@ -109,9 +109,9 @@ define([
 
         $("#sbtn").on("click", function() {
             if (code) {
-                location.href = "./add_address.html?return=1";
+                location.href = "./add_address.htm?return=1";
             } else {
-                location.href = "./add_address.html";
+                location.href = "./add_address.htm";
             }
 
         });

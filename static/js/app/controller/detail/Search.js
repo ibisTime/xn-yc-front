@@ -73,11 +73,11 @@ define([
     }
 
     function buildHtml(d) {
-        var originalPrice = base.formatMoneyD(d.originalPrice) + "元",
-            price1 = base.formatMoneyD(d.price1) + "元",
-            price2 = base.formatMoneyD(d.price2) + "橙券";
+        var originalPrice = base.formatMoneyD(d.productSpecsList[0].originalPrice) + "元",
+            price1 = base.formatMoneyD(d.productSpecsList[0].price1) + "元",
+            price2 = base.formatMoneyD(d.productSpecsList[0].price2) + "橙券";
         return `<li class="ptb8 clearfix b_bd_b">
-                    <a class="show p_r min-h100p" href="../operator/buy.html?code=${d.code}">
+                    <a class="show p_r min-h100p" href="../operator/buy.htm?code=${d.code}">
                         <div class="order-img-wrap tc default-bg"><img class="center-img1 center-lazy" src="${base.getImg(d.advPic)}"/></div>
                         <div class="order-right-wrap am-flexbox am-flexbox-align-top am-flexbox-dir-column am-flexbox-justify-between">
                             <div class="am-flexbox am-flexbox-align-top wp100">

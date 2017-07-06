@@ -130,6 +130,7 @@ define([
                 smallEle.click();
             }else{
                 base.showLoading();
+                $("#contUl").empty();
                 displayDetail("", category).then(base.hideLoading);
             }
             //下拉加载
@@ -170,11 +171,11 @@ define([
     }
     // 生成html
     function buildHtml(val) {
-        var originalPrice = base.formatMoneyD(val.originalPrice) + "元",
-            price1 = base.formatMoneyD(val.price1) + "元",
-            price2 = base.formatMoneyD(val.price2) + "橙券";
+        var originalPrice = base.formatMoneyD(val.productSpecsList[0].originalPrice) + "元",
+            price1 = base.formatMoneyD(val.productSpecsList[0].price1) + "元",
+            price2 = base.formatMoneyD(val.productSpecsList[0].price2) + "橙券";
         return `<li class="ptb8 clearfix b_bd_b plr10">
-                    <a class="show p_r min-h100p" href="../operator/buy.html?code=${val.code}">
+                    <a class="show p_r min-h100p" href="../operator/buy.htm?code=${val.code}">
                         <div class="order-img-wrap tc default-bg"><img class="center-img1" src="${base.getImg(val.advPic, 1)}"></div>
                         <div class="order-right-wrap am-flexbox am-flexbox-align-top am-flexbox-dir-column am-flexbox-justify-between">
                             <div class="am-flexbox am-flexbox-align-top wp100">

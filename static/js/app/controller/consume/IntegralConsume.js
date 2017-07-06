@@ -76,13 +76,13 @@ define([
                 $("#od-mask, #od-tipbox").addClass("hidden");
                 base.showMsg("支付成功!");
                 setTimeout(function(){
-                    location.href = "../consume/detail.html?c=" + code;
+                    location.href = "../consume/detail.htm?c=" + code;
                 }, 1000)
             }, function(error, d){
                 if(d && error == "橙券账户余额不足"){
                     d.close().remove();
                     base.confirm("橙券余额不足，是否前往购买？", "否", "是").then(function(){
-                        location.href = "../pay/buyCgM.html";
+                        location.href = "../pay/buyCgM.htm";
                 	}, function(){});
                 }
             });

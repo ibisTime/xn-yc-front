@@ -32,7 +32,7 @@ define([
                 });
                 //支付订单
                 $("#sbtn").on("click", function() {
-                    location.href = '../pay/pay_order.html?code=' + code;
+                    location.href = '../pay/pay_order.htm?code=' + code;
                 });
                 addListener();
                 //待收货
@@ -75,7 +75,7 @@ define([
         var productSpecs = data.product;
         return `<ul>
                     <li class="ptb8 clearfix b_bd_b plr10" modelCode="${productSpecs.productCode}">
-                        <a class="show p_r min-h100p" href="../operator/buy.html?code=${productSpecs.productCode}">
+                        <a class="show p_r min-h100p" href="../operator/buy.htm?code=${productSpecs.productCode}">
                             <div class="order-img-wrap tc default-bg">
                                 <img class="center-img1" src="${base.getImg(data.product.advPic)}"/>
                             </div>

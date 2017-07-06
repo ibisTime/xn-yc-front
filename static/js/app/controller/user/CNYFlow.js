@@ -98,16 +98,16 @@ define([
     }
     function addListener() {
         $("#recharge").on("click", function() {
-            location.href = "../pay/cny_recharge.html"
+            location.href = "../pay/cny_recharge.htm"
         });
         $("#toWithDraw").on("click", function() {
             if (tradepwdFlag == null || tradepwdFlag == "0") {
                 base.showMsg("未设置交易密码");
                 setTimeout(function() {
-                    location.href = "set_tradePwd.html"
+                    location.href = "set_tradePwd.htm"
                 }, 1200)
             } else {
-                location.href = "toWithDraw.html"
+                location.href = "toWithDraw.htm"
             }
         });
         $(window).on("scroll", function() {

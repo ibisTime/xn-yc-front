@@ -33,12 +33,12 @@ define([
         // 橙券支付
         $("#cqPay").click(function(e) {
             e.stopPropagation();
-            location.href = "./integral_consume.html?c=" + code + "&n=" + $("#name").text();
+            location.href = "./integral_consume.htm?c=" + code + "&n=" + $("#name").text();
         });
         // 人民币支付
         $("#rmbPay").click(function(e) {
             e.stopPropagation();
-            location.href = "../pay/rmb_consume.html?c=" + code + "&rate=" + rate2 + "&n=" + $("#name").text();
+            location.href = "../pay/rmb_consume.htm?c=" + code + "&rate=" + rate2 + "&n=" + $("#name").text();
         });
     }
 

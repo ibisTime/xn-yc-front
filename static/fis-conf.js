@@ -23,7 +23,7 @@ fis.match('*', {
     release: '/static/$0',
     //useMap: true
 });
-fis.match('*.html', {
+fis.match('*.htm', {
     release: '/$0'
 });
 fis.match('*.{css,less,scss}', {

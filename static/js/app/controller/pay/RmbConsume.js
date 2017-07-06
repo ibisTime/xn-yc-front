@@ -88,7 +88,7 @@ define([
             if (payType == 1) {
                 base.showMsg("支付成功");
                 setTimeout(function() {
-                    location.href = "../consume/detail.html?c=" + code;
+                    location.href = "../consume/detail.htm?c=" + code;
                 }, 1000);
             } else {
                 wxPay(data);
@@ -97,7 +97,7 @@ define([
             if (d && error == "账户余额不足") {
                 d.close().remove();
                 base.confirm("账户余额不足，是否前往充值？", "否", "是").then(function() {
-                    location.href = "../pay/cny_recharge.html";
+                    location.href = "../pay/cny_recharge.htm";
                 }, function() {});
             }
         });
@@ -108,7 +108,7 @@ define([
             weixin.initPay(data, () => {
                 base.showMsg("支付成功");
                 setTimeout(function(){
-                    location.href = "../consume/detail.html?c=" + code;
+                    location.href = "../consume/detail.htm?c=" + code;
                 }, 1000);
             }, () => {
                 base.showMsg("支付失败");

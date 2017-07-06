@@ -48,23 +48,23 @@ define([
         });
         // 当季水果
         $("#djsg").click(function(){
-            location.href = "detail/mall_list.html?c=" + DJSG;
+            location.href = "detail/mall_list.htm?c=" + DJSG;
         });
         // 配送计划
         $("#psjh").click(function(){
-            location.href = "detail/mall_list.html?c=" + PSJH;
+            location.href = "detail/mall_list.htm?c=" + PSJH;
         });
         // 果树认购
         $("#gsrg").click(function(){
-            location.href = "detail/mall_list.html?c=" + GSRG;
+            location.href = "detail/mall_list.htm?c=" + GSRG;
         });
         // 北大荒
         $("#bdh").click(function(){
-            location.href = "detail/mall_list.html?c=" + BDH;
+            location.href = "detail/mall_list.htm?c=" + BDH;
         });
         // 热门活动
         $("#rmhd").click(function(){
-            location.href = "operator/buy.html?code=" + RMHD;
+            location.href = "operator/buy.htm?code=" + RMHD;
         });
     }
 

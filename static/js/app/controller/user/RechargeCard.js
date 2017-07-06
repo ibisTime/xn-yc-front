@@ -11,10 +11,10 @@ define([
         AccountCtr.rechargeByCard(couponCode)
             .then(function() {
                 base.hideLoading();
-                location.href = "./get_success.html";
+                location.href = "./get_success.htm";
             }, function(){
                 setTimeout(function() {
-                    location.href = "../index.html"
+                    location.href = "../index.htm"
                 }, 1600);
             })
     }

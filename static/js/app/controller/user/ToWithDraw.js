@@ -39,7 +39,7 @@ define([
                     sessionStorage.setItem("returnhref", location.href);
 
                     setTimeout(function() {
-                        location.replace("./add_bankCard.html?return=1");
+                        location.replace("./add_bankCard.htm?return=1");
                     }, 1000)
 
                 }

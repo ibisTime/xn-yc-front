@@ -41,7 +41,7 @@ define([
             e.stopPropagation();
             e.preventDefault();
             var me = $(this);
-            location.href = "../detail/recharge_cardPay.html?code=" + me.closest("li[code]").attr("code") + "&a=" + me.closest("li[code]").attr("price") + "&rate=" + me.closest("li[code]").attr("rate");
+            location.href = "../detail/recharge_cardPay.htm?code=" + me.closest("li[code]").attr("code") + "&a=" + me.closest("li[code]").attr("price") + "&rate=" + me.closest("li[code]").attr("rate");
         });
     }
     // 分页获取订单
@@ -83,7 +83,7 @@ define([
             text2 = "姓名：";
         }
         return `<li class="clearfix b_bd_b b_bd_t bg_fff mb10" code="${code}" price="${invoice.amount / 1000}" rate="${invoice.product.rate}">
-                    <a class="show plr10" href="./vorder_detail.html?code=${code}" class="show">
+                    <a class="show plr10" href="./vorder_detail.htm?code=${code}" class="show">
                         <div class="wp100 b_bd_b clearfix ptb10">
                             <div class="fl">订单号：<span>${code}</span></div>
                         </div>

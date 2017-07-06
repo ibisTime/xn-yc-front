@@ -41,11 +41,11 @@ define([
 
     function addListeners(){
         $("#sbtn").on("click", function(){
-            location.href = "./add_bankCard.html";
+            location.href = "./add_bankCard.htm";
         });
         $("#bankCardContainer").on("click", ".bankcard-item", function(e){
             var me = $(this);
-            location.href = "./add_bankCard.html?code="+me.attr("data-code");
+            location.href = "./add_bankCard.htm?code="+me.attr("data-code");
         });
     }
 

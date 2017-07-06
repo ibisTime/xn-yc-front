@@ -70,7 +70,7 @@ define([
                     "amount": price * 1000
                 }).then(function(data) {
                     base.hideLoading();
-                    location.replace("recharge_cardPay.html?code=" + data.code + "&a=" + price + "&rate=" + rate);
+                    location.replace("recharge_cardPay.htm?code=" + data.code + "&a=" + price + "&rate=" + rate);
                 })
             }
 

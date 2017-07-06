@@ -95,7 +95,7 @@ define([
     function buildHtml(data, productSpec){
         return `<ul>
                     <li class="ptb8 clearfix  plr10" modelCode="${data.code}">
-                        <a href="../operator/buy.html?code=${data.code}" class="show p_r min-h100p">
+                        <a href="../operator/buy.htm?code=${data.code}" class="show p_r min-h100p">
                             <div class="order-img-wrap tc default-bg">
                                 <img class="center-img1" src="${base.getImg(data.advPic)}"/>
                             </div>
@@ -123,11 +123,11 @@ define([
             //如果没有地址，调到添加地址页
             if (this.id == "add-addr") {
             	sessionStorage.setItem("returnhref",  location.href);
-                location.href = "./add_address.html?return=1";
+                location.href = "./add_address.htm?return=1";
              //调到地址列表页
             } else {
             	sessionStorage.setItem("returnhref",  location.href);
-                location.href = "./address_list.html?c=" + $(this).attr("code") + "&return=1";
+                location.href = "./address_list.htm?c=" + $(this).attr("code") + "&return=1";
             }
         });
         //提交订单按钮
@@ -213,7 +213,7 @@ define([
             .then(function(data) {
                 base.hideLoading();
                 var code = data.code || data;
-                location.replace('../pay/pay_order.html?code=' + code);
+                location.replace('../pay/pay_order.htm?code=' + code);
             });
     }
 });
