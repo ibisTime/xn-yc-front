@@ -17,13 +17,12 @@ define([
 
     function init() {
         var code = base.getUrlParam("code");
-        // 第一次没登录进入的页面
-        if (!code) {
-            base.showLoading();
-            getAppID();
-            return;
-        }
         if (!base.isLogin()) { // 未登录
+            if (!code) {
+                base.showLoading();
+                getAppID();
+                return;
+            }
             base.showLoading("登录中...");
             wxLogin({
                 code,
@@ -32,11 +31,8 @@ define([
                 userReferee,
                 companyCode: SYSTEM_CODE
             });
-
         } else { // 已登陆
-            setTimeout(function() {
-                base.goBackUrl();
-            }, 1000);
+            location.href = "/index.htm";
         }
     }
     // 获取appId并跳转到微信登录页面
