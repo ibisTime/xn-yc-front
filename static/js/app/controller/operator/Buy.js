@@ -79,13 +79,18 @@ define([
                 location.href = `./submit_order.htm?code=${code}&q=${quantity || 1}&spec=${productSpecsCode}`;
             }
         });
-
+        var _choseQuantity = $("#chose-quantity");
         addSub.createByEle({
             sub: $("#subCount"),
             add: $("#addCount"),
             input: $("#buyCount"),
             changeFn: function () {
                 quantity = this.value;
+                var totalQuantity = +_choseQuantity.text();
+                if(quantity > totalQuantity){
+                    quantity = totalQuantity;
+                    this.value = quantity;
+                }
             }
         });
     }

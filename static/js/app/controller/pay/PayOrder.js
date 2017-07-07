@@ -50,8 +50,8 @@ define([
     function buildHtml(data) {
         var productSpecs = data.product;
         return `<ul>
-                    <li class="ptb8 clearfix b_bd_b plr10" modelCode="${productSpecs.productCode}">
-                        <a class="show p_r min-h100p" href="../operator/buy.htm?code=${productSpecs.productCode}">
+                    <li class="ptb8 clearfix b_bd_b plr10" modelCode="${productSpecs.code}">
+                        <a class="show p_r min-h100p" href="../operator/buy.htm?code=${productSpecs.code}">
                             <div class="order-img-wrap tc default-bg">
                                 <img class="center-img1" src="${base.getImg(data.product.advPic)}"/>
                             </div>
@@ -59,8 +59,8 @@ define([
                                 <div class="fl wp60"><p class="tl line-tow">${productSpecs.name}</p></div>
                                 <div class="fl wp40 tr s_11">
                                     <p class="item_totalP">
-                                        <span>${base.formatMoneyD(productSpecs.price2)}橙券</span><br/>或
-                                        <span class="item_totalP">${base.formatMoney(productSpecs.price1)}元</span>
+                                        <span>${base.formatMoneyD(data.price2)}橙券</span><br/>或
+                                        <span class="item_totalP">${base.formatMoney(data.price1)}元</span>
                                     </p>
                                     <p class="t_80">×<span>${data.quantity}</span></p>
                                 </div>
