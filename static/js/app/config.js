@@ -20,7 +20,8 @@ var RMHD = 'CP2017070317291303878453';
         var arr,
             reg = new RegExp("(^| )userId=([^;]*)(;|$)"),
             userId,
-            userReferee = "";
+            userReferee = "",
+            userRefereeKind = "";
         if (arr = document.cookie.match(reg))
             userId = unescape(arr[2]);
         // 未登录
@@ -29,7 +30,12 @@ var RMHD = 'CP2017070317291303878453';
             var r = window.location.search.substr(1).match(reg);
             if (r != null)
                 userReferee = decodeURIComponent(r[2]);
+            reg = new RegExp("(^|&)userRefereeKind=([^&]*)(&|$)", "i");
+            r = window.location.search.substr(1).match(reg);
+            if (r != null)
+                userRefereeKind = decodeURIComponent(r[2]);
             sessionStorage.setItem("userReferee", userReferee);
+            sessionStorage.setItem("userRefereeKind", userRefereeKind);
             sessionStorage.setItem("l-return", location.pathname + location.search);
             location.replace("../user/redirect.htm");
         }

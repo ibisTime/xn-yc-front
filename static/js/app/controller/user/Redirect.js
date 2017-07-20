@@ -9,9 +9,16 @@ define([
     var mobile = base.getUrlParam("m") || "";
     var smsCaptcha = base.getUrlParam("s") || "";
     var userReferee = sessionStorage.getItem("userReferee") || "";
-    if (userReferee == "") {
-        userReferee = SYSTEM_USERID
+    var userRefereeKind = sessionStorage.getItem("userRefereeKind") || "";
+
+    if(!userReferee) {
+        userReferee  = base.getUrlParam("userReferee")|| "";
+        userRefereeKind  = base.getUrlParam("userRefereeKind")|| "";
     }
+
+    if (!userReferee) {
+        userReferee = SYSTEM_USERID;
+    }  
 
     init();
 
@@ -22,13 +29,14 @@ define([
                 base.showLoading();
                 getAppID();
                 return;
-            }
+            }          
             base.showLoading("登录中...");
             wxLogin({
                 code,
                 mobile,
                 smsCaptcha,
                 userReferee,
+                userRefereeKind,
                 companyCode: SYSTEM_CODE
             });
         } else { // 已登陆
@@ -42,7 +50,7 @@ define([
                 base.hideLoading();
                 if (data.length) {
                     var appid = data[0].password;
-                    var redirect_uri = encodeURIComponent(base.getDomain() + "/user/redirect.htm?m=" + mobile + "&s=" + smsCaptcha);
+                    var redirect_uri = encodeURIComponent(base.getDomain() + "/user/redirect.htm?m=" + mobile + "&s=" + smsCaptcha + "&userReferee=" + userReferee+ "&userRefereeKind=" +userRefereeKind);
                     location.replace("https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + redirect_uri + "&response_type=code&scope=snsapi_userinfo#wechat_redirect");
                 } else {
                     base.showMsg("非常抱歉，appId获取失败");
@@ -77,7 +85,7 @@ define([
                     mobile: param.mobile,
                     success: function(resMobile, resSms) {
                         mobile = resMobile;
-                        smsCaptcha = resSms;
+                        smsCaptcha = resSms;                     
                         getAppID();
                     },
                     error: function(msg) {
