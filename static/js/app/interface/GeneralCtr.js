@@ -55,7 +55,13 @@ define([
             return Ajax.get("806051", {
                 type: "2"
             }, refresh);
-        },
+        },       
+        getBanner1(location,refresh){
+            return Ajax.get("806051", {
+                location,
+                type: "2"
+            }, refresh);
+        },        
         // 查询导航列表
         getNavList(refresh){
             return Ajax.get("808007", {
